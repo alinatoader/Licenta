@@ -10,7 +10,9 @@ namespace ELearning.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name ="Answer")]
         public string Text { get; set; }
+        [Display(Name = "Comment")]
         public string Comment { get; set; }
 
         public int QuestionId { get; set; }

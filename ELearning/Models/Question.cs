@@ -14,9 +14,11 @@ namespace ELearning.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Question")]
         public string Text { get; set; }
+        [Display(Name = "Status")]
         public QuestionStatus Status { get; set; }
 
-        public virtual ICollection<Answer> Answers { get; set; }
+        public IList<Answer> Answers { get; set; }
     }
 }
