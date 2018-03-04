@@ -16,12 +16,19 @@ namespace ELearning.Data
 
             var questions = new Question[]
             {
-                new Question{Text = "Ce faci?"},
+                new Question{Text = "What is your name?", Status = QuestionStatus.Pending},
             };
-            foreach (Question q in questions)
+            context.Questions.AddRange(questions);
+            context.SaveChanges();
+
+
+            var answers = new Answer[]
             {
-                context.Questions.Add(q);
-            }
+                new Answer{Text = "Alina", Comment="This is true", Question = context.Questions.First()},
+                new Answer{Text = "Elena", Comment="This is also true", Question = context.Questions.First()},
+                new Answer{Text = "Ioana", Comment="This is false", Question = context.Questions.First()},
+            };
+            context.Answers.AddRange(answers);
             context.SaveChanges();
         }
     }

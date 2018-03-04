@@ -19,6 +19,6 @@ namespace ELearning.Models
         [Display(Name = "Status")]
         public QuestionStatus Status { get; set; }
 
-        public IList<Answer> Answers { get; set; }
+        public virtual IList<Answer> Answers { get; set; }
     }
 }
