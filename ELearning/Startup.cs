@@ -48,7 +48,7 @@ namespace ELearning
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Questions}/{action=Create}/{id?}");
+                    template: "{controller=Assignments}/{action=Create}/{id?}");
             });
         }
     }

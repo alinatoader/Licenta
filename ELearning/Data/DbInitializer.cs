@@ -30,6 +30,26 @@ namespace ELearning.Data
             //};
             //context.Answers.AddRange(answers);
             //context.SaveChanges();
+
+            var groups = new Group[]
+            {
+                new Group{Name = "231"},
+                new Group{Name = "232"},
+                new Group{Name = "233"},
+                new Group{Name = "234"},
+                new Group{Name = "235"},
+                new Group{Name = "236"},
+                new Group{Name = "237"},
+            };
+            context.Groups.AddRange(groups);
+            context.SaveChanges();
+
+            var profs = new Professor[]
+            {
+                new Professor{FirstName="Camelia", LastName="Serban", Email="camelia.serban@yahoo.com"}
+            };
+            context.Professors.AddRange(profs);
+            context.SaveChanges();
         }
     }
 }
