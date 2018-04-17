@@ -14,22 +14,22 @@ namespace ELearning.Data
             context.Database.EnsureCreated();
 
 
-            var questions = new Question[]
-            {
-                new Question{Text = "What is your name?", Status = QuestionStatus.Pending},
-            };
-            context.Questions.AddRange(questions);
-            context.SaveChanges();
+            //var questions = new Question[]
+            //{
+            //    new Question{Text = "What is your name?", Status = QuestionStatus.Pending},
+            //};
+            //context.Questions.AddRange(questions);
+            //context.SaveChanges();
 
 
-            var answers = new Answer[]
-            {
-                new Answer{Text = "Alina", Comment="This is true", Question = context.Questions.First()},
-                new Answer{Text = "Elena", Comment="This is also true", Question = context.Questions.First()},
-                new Answer{Text = "Ioana", Comment="This is false", Question = context.Questions.First()},
-            };
-            context.Answers.AddRange(answers);
-            context.SaveChanges();
+            //var answers = new Answer[]
+            //{
+            //    new Answer{Text = "Alina", Comment="This is true", Question = context.Questions.First()},
+            //    new Answer{Text = "Elena", Comment="This is also true", Question = context.Questions.First()},
+            //    new Answer{Text = "Ioana", Comment="This is false", Question = context.Questions.First()},
+            //};
+            //context.Answers.AddRange(answers);
+            //context.SaveChanges();
         }
     }
 }

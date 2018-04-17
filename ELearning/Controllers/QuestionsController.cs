@@ -8,6 +8,8 @@ using ELearning.Models;
 using ELearning.Data;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Net.Mail;
+using System.Net;
 
 namespace ELearning.Controllers
 {
@@ -27,6 +29,26 @@ namespace ELearning.Controllers
 
         public IActionResult Create()
         {
+            //try
+            //{
+            //    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+            //    message.To.Add("alina.toaderr@gmail.com");
+            //    message.Subject = "Nici un Clinet valabil pentru reparare";
+            //    message.From = new System.Net.Mail.MailAddress("teir1975@scs.ubbcluj.ro");
+            //    message.Body = "Nu mai sunt clienti la care mecanicii sa lucreze";
+            //    string sendEmailsFrom = "teir1975";
+            //    string sendEmailsFromPassword = "Alina123?";
+            //    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("www.scs.ubbcluj.ro", 465);
+            //    smtp.EnableSsl = true;
+            //    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            //    smtp.UseDefaultCredentials = false;
+            //    smtp.Credentials = new NetworkCredential(sendEmailsFrom, sendEmailsFromPassword);
+            //    smtp.Timeout = 20000;
+            //    smtp.Send(message);
+            //}
+            //catch (Exception ex)
+            //{
+            //}
             return View(new Question { Status = QuestionStatus.Pending, Answers = new List<Answer> { new Answer(), new Answer(), new Answer() } });
         }
 
