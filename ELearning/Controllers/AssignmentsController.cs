@@ -172,5 +172,15 @@ namespace ELearning.Controllers
         {
             return _context.Assignments.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> StudentAssignments(int id)
+        {
+            var user = await _context.Students.AsNoTracking().Include(u=>u.Group).Include(u=>u.Group.Assignments).FirstOrDefaultAsync(u => u.Id == id);
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return View(user.Group.Assignments);
+        }
     }
 }

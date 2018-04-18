@@ -51,36 +51,55 @@ namespace ELearning.Data
                 new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
                 new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
                 new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
             };
             context.Questions.AddRange(questions);
             context.SaveChanges();
 
             var answers = new Answer[]
             {
-                new Answer{Text = "corect", Correct = false, QuestionId = 1},
-                new Answer{Text = "corect", Correct = true, QuestionId = 1},
-                new Answer{Text = "gresit", Correct = false, QuestionId = 1},
-                new Answer{Text = "corect", Correct = true, QuestionId = 2},
-                new Answer{Text = "gresit", Correct = false, QuestionId = 2},
-                new Answer{Text = "gresit", Correct = false, QuestionId = 2},
-                new Answer{Text = "gresit", Correct = true, QuestionId = 3},
-                new Answer{Text = "corect", Correct = false, QuestionId = 3},
-                new Answer{Text = "gresit", Correct = false, QuestionId = 3},
-                new Answer{Text = "corect", Correct = true, QuestionId = 4},
-                new Answer{Text = "corect", Correct = false, QuestionId = 4},
-                new Answer{Text = "gresit", Correct = false, QuestionId = 4},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 1},
+                new Answer{Text = "rasp2", Correct = true, QuestionId = 1},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 1},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 2},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 2},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 2},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 3},
+                new Answer{Text = "rasp2", Correct = true, QuestionId = 3},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 3},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 4},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 4},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 4},
+                new Answer{Text = "rasp1", Correct = false, QuestionId = 5},
+                new Answer{Text = "rasp2", Correct = true, QuestionId = 5},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 5},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 6},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 6},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 6},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 7},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 7},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 7},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 8},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 8},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 8},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 9},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 9},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 9},
+                new Answer{Text = "rasp1", Correct = true, QuestionId = 10},
+                new Answer{Text = "rasp2", Correct = false, QuestionId = 10},
+                new Answer{Text = "rasp3", Correct = false, QuestionId = 10},
             };
             context.Answers.AddRange(answers);
+            context.SaveChanges();
+
+            var assignments = new Assignment[]
+            {
+                new Assignment{ Domain = "OOP", Deadline = new DateTime(2018,5,23), GroupId = 4 , ProfessorId = 1},
+                new Assignment{ Domain = "Calcul numeric", Deadline = new DateTime(2018,7,23), GroupId = 4 , ProfessorId = 1},
+                new Assignment{ Domain = "Testare software", Deadline = new DateTime(2018,5,25), GroupId = 4 , ProfessorId = 1},
+                new Assignment{ Domain = "Inteligenta artificiala", Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1},
+            };
+            context.Assignments.AddRange(assignments);
             context.SaveChanges();
         }
     }

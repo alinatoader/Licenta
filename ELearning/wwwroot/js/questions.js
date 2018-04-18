@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     var menuPoints = $('#tmNavbar li');
     menuPoints.removeClass('active');
-    $(menuPoints[1]).addClass('active');
+    $(menuPoints[0]).addClass('active');
 
     var questions = $('.question-box');
     questions.each(function (index, item) {

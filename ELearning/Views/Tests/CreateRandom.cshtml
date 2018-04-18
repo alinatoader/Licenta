@@ -1,0 +1,38 @@
+﻿@model ELearning.Models.TestViewModel
+
+@{
+    ViewData["Title"] = "Genereaza test";
+    var color = "";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/tests.js"></script>
+}
+
+<form asp-action="CreateRandom">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group" style="display:inline-block;width:10%">
+        <input type="number" asp-for="NoQuestions" class="form-control" min="1" max="@Model.MaxNoQuestions"/>
+        <span asp-validation-for="NoQuestions" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Genereaza test" class="tm-btn" />
+</form>
+
+@foreach (var q in Model.Questions)
+{
+    <h4 class="tm-gold-text">@q.Text</h4>
+    <ul>
+        @foreach (var a in q.Answers)
+        {
+            @if (a.Correct)
+            { color = "green"; }
+            else
+            { color = "red"; }
+            <li>
+                <svg width="10" height="10">
+                    <circle cx="5" cy="5" r="4" fill="@color" />
+                </svg>&nbsp;@a.Text
+            </li>
+        }
+    </ul>
+}
