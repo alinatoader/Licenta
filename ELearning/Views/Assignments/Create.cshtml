@@ -3,46 +3,46 @@
 @{
     ViewData["Title"] = "Asignare tema";
 }
-<div class="container-fluid">
-    <div class="row tm-margin-t-big">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div class="tm-2-col-left">
-                <h3 class="tm-gold-text tm-title">Asignare tema</h3>
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Deadline" class="control-label"></label>
-                        <input asp-for="Deadline" class="form-control" type="date" />
-                        <span asp-validation-for="Deadline" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Domain" class="control-label"></label>
-                        <input list="domains" asp-for="Domain" class="form-control" />
-                        <datalist id="domains">
-                            @foreach (var d in ViewBag.Domain)
-                {
-                    <option value="@d.Text" />
-    }
-                        </datalist>
-                        <span asp-validation-for="Domain" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="GroupId" class="control-label"></label>
-                        <input list="groups" asp-for="GroupId" class="form-control" />
-                        <datalist id="groups">
-                            @foreach (var g in ViewBag.GroupId)
-                {
-                    <option value="@g.Text" />
-    }
-                        </datalist>
-                    </div>
-                    <input asp-for="ProfessorId" value="1" hidden />
-                    <div class="form-group">
-                        <input type="submit" value="Trimite" class="btn btn-default" />
-                    </div>
-                </form>
-            </div>
+
+<div class="row tm-margin-t-big">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-2-col-left">
+            <h3 class="tm-gold-text tm-title">Asignare tema</h3>
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Deadline" class="control-label"></label>
+                    <input asp-for="Deadline" class="form-control" type="date" />
+                    <span asp-validation-for="Deadline" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Domain" class="control-label"></label>
+                    <input list="domains" asp-for="Domain" class="form-control" />
+                    <datalist id="domains">
+                        @foreach (var d in ViewBag.Domain)
+                        {
+                            <option value="@d.Text" />
+                        }
+                    </datalist>
+                    <span asp-validation-for="Domain" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="GroupId" class="control-label"></label>
+                    <input list="groups" asp-for="GroupId" class="form-control" />
+                    <datalist id="groups">
+                        @foreach (var g in ViewBag.GroupId)
+                        {
+                            <option value="@g.Text" />
+                        }
+                    </datalist>
+                </div>
+                <input asp-for="ProfessorId" value="1" hidden />
+                <div class="form-group">
+                    <input type="submit" value="Trimite" class="btn btn-default" />
+                </div>
+            </form>
         </div>
-    </div> <!-- row -->
+    </div>
 </div>
+
 

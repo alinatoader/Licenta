@@ -13,24 +13,6 @@ namespace ELearning.Data
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
-
-            //var questions = new Question[]
-            //{
-            //    new Question{Text = "What is your name?", Status = QuestionStatus.Pending},
-            //};
-            //context.Questions.AddRange(questions);
-            //context.SaveChanges();
-
-
-            //var answers = new Answer[]
-            //{
-            //    new Answer{Text = "Alina", Comment="This is true", Question = context.Questions.First()},
-            //    new Answer{Text = "Elena", Comment="This is also true", Question = context.Questions.First()},
-            //    new Answer{Text = "Ioana", Comment="This is false", Question = context.Questions.First()},
-            //};
-            //context.Answers.AddRange(answers);
-            //context.SaveChanges();
-
             var groups = new Group[]
             {
                 new Group{Name = "231"},
@@ -49,6 +31,56 @@ namespace ELearning.Data
                 new Professor{FirstName="Camelia", LastName="Serban", Email="camelia.serban@yahoo.com"}
             };
             context.Professors.AddRange(profs);
+            context.SaveChanges();
+
+            var students = new Student[]
+            {
+                new Student{FirstName="Alina", LastName="Toader", Email="alina@yahoo.com", GroupId = 4}
+            };
+            context.Students.AddRange(students);
+            context.SaveChanges();
+
+            var questions = new Question[]
+            {
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
+            };
+            context.Questions.AddRange(questions);
+            context.SaveChanges();
+
+            var answers = new Answer[]
+            {
+                new Answer{Text = "corect", Comment="This is true", QuestionId = 1},
+                new Answer{Text = "corect", Comment="This is also true", QuestionId = 1},
+                new Answer{Text = "gresit", Comment="This is false", QuestionId = 1},
+                new Answer{Text = "corect", Comment="This is true", QuestionId = 2},
+                new Answer{Text = "gresit", Comment="This is also true", QuestionId = 2},
+                new Answer{Text = "gresit", Comment="This is false", QuestionId = 2},
+                new Answer{Text = "gresit", Comment="This is true", QuestionId = 3},
+                new Answer{Text = "corect", Comment="This is also true", QuestionId = 3},
+                new Answer{Text = "gresit", Comment="This is false", QuestionId = 3},
+                new Answer{Text = "corect", Comment="This is true", QuestionId = 4},
+                new Answer{Text = "corect", Comment="This is also true", QuestionId = 4},
+                new Answer{Text = "gresit", Comment="This is false", QuestionId = 4},
+            };
+            context.Answers.AddRange(answers);
             context.SaveChanges();
         }
     }

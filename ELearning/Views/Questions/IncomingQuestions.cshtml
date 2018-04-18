@@ -2,66 +2,104 @@
 
 @{
     ViewData["Title"] = "IncomingQuestions";
+    var i = 1;
 }
 
-<h2>Incoming Questions</h2>
+@section Scripts{
+    <script type="text/javascript" src="~/js/questions.js"></script>
+
+}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-xs-center">
+        <h2 class="tm-gold-text tm-title">Incoming Questions</h2>
+    </div>
+</div>
+@foreach (var q in Model)
+{
+    if (i % 4 == 0)
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+                <div class="tm-content-box">
+                    <p class="tm-margin-b-20">
+                        @q.Text
+                    </p>
+                    <a href="#" class="tm-btn text-uppercase">Detalii</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3">
+            <div class="tm-content-box">
+                <p class="tm-margin-b-20">
+                    @q.Text
+                </p>
+                <a href="#" class="tm-btn text-uppercase">Detalii</a>
+            </div>
+        </div>
+    }
+    { i++;}
+}
 
 
-<section class="resume-section p-3 p-lg-5 d-flex flex-column">
-    <div class="my-auto">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Text)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Answers)
-                    </th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>
-                <td>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Answers[0].Text)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => item.Answers[0].Comment)
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var answer in item.Answers)
+@*<section class="resume-section p-3 p-lg-5 d-flex flex-column">
+        <div class="my-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Text)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Answers)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => answer.Text)
+                                @Html.DisplayFor(modelItem => item.Text)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => answer.Comment)
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Answers[0].Text)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Answers[0].Comment)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var answer in item.Answers)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => answer.Text)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => answer.Comment)
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Accept", "AcceptQuestion", new { id = item.Id }) |
+                                @Html.ActionLink("Reject", "RejectQuestion", new { id = item.Id })
                             </td>
                         </tr>
-            }
-                        </tbody>
-                    </table>
-                </td>
-                <td>
-                    @Html.ActionLink("Accept", "AcceptQuestion", new { id = item.Id }) |
-                    @Html.ActionLink("Reject", "RejectQuestion", new { id = item.Id })
-                </td>
-            </tr>
-}
-            </tbody>
-        </table>
-    </div>
-</section>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>*@
+
