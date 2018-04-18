@@ -51,14 +51,14 @@ namespace ELearning.Controllers
             }
             return View(question);
         }
-        
+
 
         public async Task<IActionResult> IncomingQuestions()
         {
             return View(await _context.Questions.AsNoTracking().Include(q => q.Answers).Where(q => q.Status == QuestionStatus.Pending).ToArrayAsync());
         }
 
-       public async Task<IActionResult> AcceptQuestion(int id)
+        public async Task<IActionResult> AcceptQuestion(int id)
         {
             var question = await _context.Questions.AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
             if (question == null)
@@ -69,25 +69,14 @@ namespace ELearning.Controllers
             return RedirectToAction(nameof(IncomingQuestions));
         }
 
-        public async Task<IActionResult> RejectQuestion(int id)
-        {
-            var question = await _context.Questions.AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
-            if (question == null)
-                return BadRequest();
-            question.Status = QuestionStatus.Rejected;
-            _context.Update(question);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(IncomingQuestions));
-        }
-
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var question = await _context.Questions.AsNoTracking().Include(q=>q.Answers).SingleOrDefaultAsync(m => m.Id == id);
+            var question = await _context.Questions.AsNoTracking().Include(q => q.Answers).Include(q => q.Student).SingleOrDefaultAsync(m => m.Id == id);
             if (question == null)
             {
                 return NotFound();
@@ -166,6 +155,38 @@ namespace ELearning.Controllers
                 return RedirectToAction(nameof(IncomingQuestions));
             }
             return View(question);
+        }
+
+        public async Task<IActionResult> RejectQuestion(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Questions.AsNoTracking().SingleOrDefaultAsync(m => m.Id == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                question.Status = QuestionStatus.Rejected;
+                _context.Update(question);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!QuestionExists(question.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(IncomingQuestions));
         }
 
     }
