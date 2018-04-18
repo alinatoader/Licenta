@@ -4,6 +4,10 @@
     ViewData["Title"] = "Asignare tema";
 }
 
+@section Scripts{
+    <script type="text/javascript" src="~/js/assignments.js"></script>
+}
+
 <div class="row tm-margin-t-big">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="tm-2-col-left">
@@ -38,7 +42,7 @@
                 </div>
                 <input asp-for="ProfessorId" value="1" hidden />
                 <div class="form-group">
-                    <input type="submit" value="Trimite" class="btn btn-default" />
+                    <input type="submit" value="Trimite" class="tm-btn" />
                 </div>
             </form>
         </div>

@@ -19,6 +19,23 @@
 }
 
 .tm-section {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.answer-row input.form-control {
+    width: 97%;
+    display: inline-block;
+}
+
+.tm-btn.reject-button {
+    background-color: darkslategrey;
+}
+
+    .tm-btn.reject-button:hover, .tm-btn.reject-button:focus {
+        background-color: #192b2b;
+    }
+
+.right-buttons {
+    float: right;
 }

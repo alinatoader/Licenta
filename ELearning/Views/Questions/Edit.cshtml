@@ -1,0 +1,24 @@
+﻿@model ELearning.Models.Question
+
+@{
+    ViewData["Title"] = "Editare intrebare";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/questions.js"></script>
+}
+
+<form asp-action="Save">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+    @Html.Partial("EditPartial.cshtml")
+    <div class="form-group">
+        <a asp-action="IncomingQuestions" class="tm-btn">Inapoi</a>
+        <div class="right-buttons">
+            <a asp-action="IncomingQuestions" class="tm-btn reject-button">Respinge</a>
+            <input type="submit" value="Salveaza" class="tm-btn" />
+        </div>
+    </div>
+</form>
+
+

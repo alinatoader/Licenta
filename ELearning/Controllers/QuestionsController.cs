@@ -29,26 +29,6 @@ namespace ELearning.Controllers
 
         public IActionResult Create()
         {
-            //try
-            //{
-            //    System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-            //    message.To.Add("alina.toaderr@gmail.com");
-            //    message.Subject = "Nici un Clinet valabil pentru reparare";
-            //    message.From = new System.Net.Mail.MailAddress("teir1975@scs.ubbcluj.ro");
-            //    message.Body = "Nu mai sunt clienti la care mecanicii sa lucreze";
-            //    string sendEmailsFrom = "teir1975";
-            //    string sendEmailsFromPassword = "Alina123?";
-            //    System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("www.scs.ubbcluj.ro", 465);
-            //    smtp.EnableSsl = true;
-            //    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
-            //    smtp.UseDefaultCredentials = false;
-            //    smtp.Credentials = new NetworkCredential(sendEmailsFrom, sendEmailsFromPassword);
-            //    smtp.Timeout = 20000;
-            //    smtp.Send(message);
-            //}
-            //catch (Exception ex)
-            //{
-            //}
             return View(new Question { Status = QuestionStatus.Pending, Answers = new List<Answer> { new Answer(), new Answer(), new Answer() } });
         }
 
@@ -71,22 +51,11 @@ namespace ELearning.Controllers
             }
             return View(question);
         }
-
-        public async Task<IActionResult> PublicQuestions()
-        {
-            return View(await _context.Questions.AsNoTracking().Include(q => q.Answers).Where(q => q.Status == QuestionStatus.Accepted).ToArrayAsync());
-
-        }
-
-        public async Task<IActionResult> MyQuestions()
-        {
-            return View(await _context.Questions.AsNoTracking().ToArrayAsync());
-        }
+        
 
         public async Task<IActionResult> IncomingQuestions()
         {
-            var x= await _context.Questions.AsNoTracking().Include(q => q.Answers).Where(q => q.Status == QuestionStatus.Pending).ToArrayAsync();
-            return View(x) ;
+            return View(await _context.Questions.AsNoTracking().Include(q => q.Answers).Where(q => q.Status == QuestionStatus.Pending).ToArrayAsync());
         }
 
        public async Task<IActionResult> AcceptQuestion(int id)
@@ -109,6 +78,94 @@ namespace ELearning.Controllers
             _context.Update(question);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(IncomingQuestions));
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Questions.AsNoTracking().Include(q=>q.Answers).SingleOrDefaultAsync(m => m.Id == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
+        }
+
+        // POST: Assignments/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id, Text, Status, StudentId, Answers")] Question question)
+        {
+            if (id != question.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(question);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuestionExists(question.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IncomingQuestions));
+            }
+            return View(question);
+        }
+
+        private bool QuestionExists(int id)
+        {
+            return _context.Questions.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Save(int id, [Bind("Id, Text, Status, StudentId, Answers")] Question question)
+        {
+            if (id != question.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    question.Status = QuestionStatus.Accepted;
+                    _context.Update(question);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuestionExists(question.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IncomingQuestions));
+            }
+            return View(question);
         }
 
     }

@@ -12,9 +12,7 @@ namespace ELearning.Models
         public int Id { get; set; }
         [Display(Name ="Answer")]
         public string Text { get; set; }
-        [Display(Name = "Comment")]
-        public string Comment { get; set; }
-
+        public bool Correct { get; set; }
         public int QuestionId { get; set; }
         public virtual Question Question { get; set; }
     }

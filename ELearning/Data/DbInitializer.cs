@@ -67,18 +67,18 @@ namespace ELearning.Data
 
             var answers = new Answer[]
             {
-                new Answer{Text = "corect", Comment="This is true", QuestionId = 1},
-                new Answer{Text = "corect", Comment="This is also true", QuestionId = 1},
-                new Answer{Text = "gresit", Comment="This is false", QuestionId = 1},
-                new Answer{Text = "corect", Comment="This is true", QuestionId = 2},
-                new Answer{Text = "gresit", Comment="This is also true", QuestionId = 2},
-                new Answer{Text = "gresit", Comment="This is false", QuestionId = 2},
-                new Answer{Text = "gresit", Comment="This is true", QuestionId = 3},
-                new Answer{Text = "corect", Comment="This is also true", QuestionId = 3},
-                new Answer{Text = "gresit", Comment="This is false", QuestionId = 3},
-                new Answer{Text = "corect", Comment="This is true", QuestionId = 4},
-                new Answer{Text = "corect", Comment="This is also true", QuestionId = 4},
-                new Answer{Text = "gresit", Comment="This is false", QuestionId = 4},
+                new Answer{Text = "corect", Correct = false, QuestionId = 1},
+                new Answer{Text = "corect", Correct = true, QuestionId = 1},
+                new Answer{Text = "gresit", Correct = false, QuestionId = 1},
+                new Answer{Text = "corect", Correct = true, QuestionId = 2},
+                new Answer{Text = "gresit", Correct = false, QuestionId = 2},
+                new Answer{Text = "gresit", Correct = false, QuestionId = 2},
+                new Answer{Text = "gresit", Correct = true, QuestionId = 3},
+                new Answer{Text = "corect", Correct = false, QuestionId = 3},
+                new Answer{Text = "gresit", Correct = false, QuestionId = 3},
+                new Answer{Text = "corect", Correct = true, QuestionId = 4},
+                new Answer{Text = "corect", Correct = false, QuestionId = 4},
+                new Answer{Text = "gresit", Correct = false, QuestionId = 4},
             };
             context.Answers.AddRange(answers);
             context.SaveChanges();
