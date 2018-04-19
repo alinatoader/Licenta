@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace ELearning.Models
 {
-    public class TestQuestion
+    public class Evaluation
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Question")]
-        public int QuestionId { get; set; }
-        public virtual Question Question { get; set; }
         [ForeignKey("Test")]
-        public int? TestId { get; set; }
+        public int TestId { get; set; }
         public virtual Test Test { get; set; }
+        [ForeignKey("Student")]
+        public int StudentId { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

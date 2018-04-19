@@ -40,18 +40,38 @@ namespace ELearning.Data
             context.Students.AddRange(students);
             context.SaveChanges();
 
+            var concepts = new Concept[]
+            {
+                new Concept{Name = "OOP"},
+                new Concept{Name = "Calcul numeric"},
+                new Concept{Name = "Testare software"},
+                new Concept{Name = "Inteligenta artificiala"},
+            };
+            context.Concepts.AddRange(concepts);
+            context.SaveChanges();
+
+            var assignments = new Assignment[]
+{
+                new Assignment{  Deadline = new DateTime(2018,5,23), GroupId = 4 , ProfessorId = 1, ConceptId = 1},
+                new Assignment{  Deadline = new DateTime(2018,7,23), GroupId = 4 , ProfessorId = 1, ConceptId = 2},
+                new Assignment{  Deadline = new DateTime(2018,5,25), GroupId = 4 , ProfessorId = 1, ConceptId = 3},
+                new Assignment{ Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1, ConceptId = 4},
+};
+            context.Assignments.AddRange(assignments);
+            context.SaveChanges();
+
             var questions = new Question[]
             {
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, StudentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 3},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 4},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
             };
             context.Questions.AddRange(questions);
             context.SaveChanges();
@@ -92,15 +112,7 @@ namespace ELearning.Data
             context.Answers.AddRange(answers);
             context.SaveChanges();
 
-            var assignments = new Assignment[]
-            {
-                new Assignment{ Domain = "OOP", Deadline = new DateTime(2018,5,23), GroupId = 4 , ProfessorId = 1},
-                new Assignment{ Domain = "Calcul numeric", Deadline = new DateTime(2018,7,23), GroupId = 4 , ProfessorId = 1},
-                new Assignment{ Domain = "Testare software", Deadline = new DateTime(2018,5,25), GroupId = 4 , ProfessorId = 1},
-                new Assignment{ Domain = "Inteligenta artificiala", Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1},
-            };
-            context.Assignments.AddRange(assignments);
-            context.SaveChanges();
+
         }
     }
 }

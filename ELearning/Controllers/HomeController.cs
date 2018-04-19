@@ -11,9 +11,9 @@ namespace ELearning.Controllers
         public IActionResult Start()
         {
             //daca e profesor
-            // return RedirectToAction("IncomingQuestions", "Questions");
+            return RedirectToAction("IncomingQuestions", "Questions");
             //daca e student
-            return RedirectToAction("Create", "Questions", new { id = 1 });
+            //return RedirectToAction("Create", "Questions", new { id = 1 });
         }
     }
 }

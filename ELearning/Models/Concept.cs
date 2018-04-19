@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ELearning.Models
 {
-    public abstract class User
+    public class Concept
     {
         [Key]
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<QuestionConcept> QuestionConcepts { get; set; }
     }
 }
