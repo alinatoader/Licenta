@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ELearning.Controllers
 {
@@ -22,34 +23,32 @@ namespace ELearning.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Create()
         {
-            return View();
-        }
-
-        public IActionResult Create()
-        {
+            var student = await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == student.GroupId), "Id", "ComposedName");
             return View(new Question { Status = QuestionStatus.Pending, Answers = new List<Answer> { new Answer(), new Answer(), new Answer() } });
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Text,Status,Answers")]Question question)
+        public async Task<string> Create(Question question)
         {
             if (ModelState.IsValid)
             {
                 var exists = await _context.Questions.AsNoTracking().FirstOrDefaultAsync(q => q.Text == question.Text);
                 if (exists == null)
                 {
+                    question.Status = QuestionStatus.Pending;
                     await _context.AddAsync(question);
                     await _context.SaveChangesAsync();
-                    ViewData["Message"] = "Question added successfully";
+                    return "Intrebare adaugata cu succes!";
                 }
                 else
                 {
-                    ViewData["Message"] = "This question already exists";
+                    return "Aceasta intrebare exista deja. Mai incearca!";
                 }
             }
-            return View(question);
+            return "Completeaza cu date valide!";
         }
 
 

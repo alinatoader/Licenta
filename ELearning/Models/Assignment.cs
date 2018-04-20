@@ -25,5 +25,12 @@ namespace ELearning.Models
         [Display(Name = "Concept")]
         public virtual Concept Concept { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
+        public string ComposedName
+        {
+            get
+            {
+                return Concept.Name + " - " + Professor.FirstName + " " + Professor.LastName + " - Deadline: "+ Deadline.ToLongDateString();
+            }
+        }
     }
 }

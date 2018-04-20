@@ -24,16 +24,18 @@ namespace ELearning.Models
         public int Id { get; set; }
         [Display(Name = "Question")]
         public string Text { get; set; }
+        public string Comment { get; set; }
         [Display(Name = "Status")]
-        public QuestionStatus Status { get; set; }
-        public QuestionDifficulty Difficulty { get; set; }
+        public QuestionStatus? Status { get; set; }
+        [Display(Name = "Dificultate")]
+        public QuestionDifficulty? Difficulty { get; set; }
         [ForeignKey("Student")]
         public int? StudentId { get; set; }
         public virtual Student Student { get; set; }
         [ForeignKey("Assignment")]
         public int AssignmentId { get; set; }
         public virtual Assignment Assignment { get; set; }
-        public virtual ICollection<Answer> Answers { get; set; }
+        public virtual IList<Answer> Answers { get; set; }
         public virtual ICollection<TestQuestion> TestQuestions { get; set; }
         public virtual ICollection<QuestionConcept> QuestionConcepts { get; set; }
 

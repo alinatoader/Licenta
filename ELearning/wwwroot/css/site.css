@@ -46,3 +46,26 @@ ul {
     padding-left: 1em;
     text-indent: -1em;
 }
+
+.questions-submenu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+    .questions-submenu a {
+        display: block;
+    }
+
+#questions-submenu-entry:hover .questions-submenu {
+    display: block;
+}
+
+.questions-submenu .nav-link + .nav-link {
+    margin-left: 0;
+}
+
+#add-answer-button {
+    padding: 0 5px;
+}
+
