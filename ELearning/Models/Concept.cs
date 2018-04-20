@@ -10,6 +10,7 @@ namespace ELearning.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Concept")]
         public string Name { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual ICollection<QuestionConcept> QuestionConcepts { get; set; }

@@ -49,9 +49,8 @@ namespace ELearning.Controllers
         // GET: Assignments/Create
         public IActionResult Create()
         {
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id","Name");
-            // ViewData["Domain"] = new SelectList(_context.Assignments.AsNoTracking().Select(a => a.Domain));
-            ViewData["Domain"] = new SelectList(new[] { "Baze de date", "Sisteme de operare", "Metrici soft" });
+            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id","Name");
+            ViewData["Concept"] = new SelectList(_context.Concepts.AsNoTracking(), "Id", "Name");
             return View();
         }
 
@@ -60,25 +59,34 @@ namespace ELearning.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Deadline,Domain,GroupId,ProfessorId")] Assignment assignment)
+        public async Task<IActionResult> Create([Bind("Deadline,ProfessorId,Concept,Group")] Assignment assignment)
         {
             if (ModelState.IsValid)
             {
-                var group = _context.Groups.AsNoTracking().FirstOrDefault(g => g.Name == assignment.GroupId.ToString());
+                var group = _context.Groups.AsNoTracking().FirstOrDefault(g => g.Name == assignment.Group.Name);
                 if(group == null)
                 {
-                    group = new Group() { Name = assignment.GroupId.ToString() };
+                    group = new Group() { Name = assignment.Group.Name };
                     _context.Add(group);
                     await _context.SaveChangesAsync();
                 }
+                var concept = _context.Concepts.AsNoTracking().FirstOrDefault(c => c.Name == assignment.Concept.Name);
+                if (concept == null)
+                {
+                    concept = new Concept() { Name = assignment.Concept.Name };
+                    _context.Add(concept);
+                    await _context.SaveChangesAsync();
+                }
                 assignment.GroupId = group.Id;
+                assignment.ConceptId = concept.Id;
+                assignment.Group = null;
+                assignment.Concept = null;
                 _context.Add(assignment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
-            ViewData["GroupId"] = new SelectList(_context.Groups, "Id", "Name");
-            // ViewData["Domain"] = new SelectList(_context.Assignments.AsNoTracking().Select(a => a.Domain));
-            ViewData["Domain"] = new SelectList(new[] { "Baze de date", "Sisteme de operare", "Metrici soft" });
+            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name", assignment.Group);
+            ViewData["Concept"] = new SelectList(_context.Concepts.AsNoTracking(), "Id", "Name", assignment.Concept);
             return View(assignment);
         }
 
