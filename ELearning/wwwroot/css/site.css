@@ -51,6 +51,8 @@ ul {
     display: none;
     position: absolute;
     z-index: 1;
+    background-color: #fffcf3;
+    border-radius: 6px;
 }
 
     .questions-submenu a {
@@ -63,6 +65,7 @@ ul {
 
 .questions-submenu .nav-link + .nav-link {
     margin-left: 0;
+    width: 168.234px;
 }
 
 #add-answer-button {

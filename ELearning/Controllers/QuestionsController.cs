@@ -188,5 +188,32 @@ namespace ELearning.Controllers
             return RedirectToAction(nameof(IncomingQuestions));
         }
 
+        public async Task<IActionResult> MyAcceptedQuestions(int id)
+        {
+            id = 1;
+            var student = await _context.Students.AsNoTracking().Include(s=>s.Questions).FirstOrDefaultAsync(s => s.Id == id);
+            if (student == null)
+                return BadRequest();
+            return View(student.Questions.Where(q => q.Status == QuestionStatus.Accepted));
+        }
+
+        public async Task<IActionResult> MyPendingQuestions(int id)
+        {
+            id = 1;
+            var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
+            if (student == null)
+                return BadRequest();
+            return View(student.Questions.Where(q => q.Status == QuestionStatus.Pending));
+        }
+
+        public async Task<IActionResult> MyRejectedQuestions(int id)
+        {
+            id = 1;
+            var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
+            if (student == null)
+                return BadRequest();
+            return View(student.Questions.Where(q => q.Status == QuestionStatus.Rejected));
+        }
+
     }
 }

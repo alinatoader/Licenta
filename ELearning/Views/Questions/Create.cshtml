@@ -16,9 +16,9 @@
         <li class="nav-item" id="questions-submenu-entry">
             <span class="nav-link">Vezi intrebari</span>
             <div class="questions-submenu">
-                <a href="#" class="nav-link">Acceptate</a>
-                <a href="#" class="nav-link">In asteptare</a>
-                <a href="#" class="nav-link">Respinse</a>
+                <a asp-controller="Questions" asp-action="MyAcceptedQuestions" class="nav-link">Acceptate</a>
+                <a asp-controller="Questions" asp-action="MyPendingQuestions" class="nav-link">In asteptare</a>
+                <a asp-controller="Questions" asp-action="MyRejectedQuestions" class="nav-link">Respinse</a>
             </div>
         </li>
     </ul>

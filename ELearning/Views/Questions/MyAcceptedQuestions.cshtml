@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ELearning.Models.Question>
+
+@{
+    ViewData["Title"] = "Intrebari acceptate";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/questions.js"></script>
+}
+
+<div class="collapse navbar-toggleable-sm">
+    <ul class="nav navbar-nav">
+        <li class="nav-item">
+            <a asp-controller="Questions" asp-action="Create" class="nav-link">Creeaza intrebare</a>
+        </li>
+        <li class="nav-item" id="questions-submenu-entry">
+            <span class="nav-link" style="background-color:#cc9900;color:white;">Vezi intrebari</span>
+            <div class="questions-submenu">
+                <a asp-controller="Questions" asp-action="MyAcceptedQuestions" class="nav-link">Acceptate</a>
+                <a asp-controller="Questions" asp-action="MyPendingQuestions" class="nav-link">In asteptare</a>
+                <a asp-controller="Questions" asp-action="MyRejectedQuestions" class="nav-link">Respinse</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-xs-center">
+        <h2 class="tm-gold-text tm-title">Intrebarile mele acceptate</h2>
+    </div>
+</div>
+@foreach (var q in Model)
+{
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 question-box">
+        <div class="tm-content-box">
+            <p class="tm-margin-b-20">
+                @q.Text
+            </p>
+            <a asp-action="Details" asp-route-id="@q.Id" class="tm-btn text-uppercase">Detalii</a>
+        </div>
+    </div>
+}
+
+
