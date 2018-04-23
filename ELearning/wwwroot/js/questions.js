@@ -25,7 +25,7 @@
             '</div >');
     });
 
-    $('#create-question-form').submit(function () {
+    $('.create-question-form').submit(function () {
         event.preventDefault();
         var assignmentId = Number(document.getElementById('Assignment').value);
         var text = document.getElementById('Text').value;
@@ -37,8 +37,8 @@
         });
         var question = { Text: text, StudentId: 1, AssignmentId: 1, Answers: answers };
         $.ajax({
-            type: "POST",
-            url: '/Questions/Create',
+            type: 'POST',
+            url: $('.create-question-form:visible').attr('action'),
             data: question,
             dataType: 'json',
             success: function (response) {

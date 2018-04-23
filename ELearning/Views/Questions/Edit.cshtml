@@ -1,0 +1,45 @@
+﻿@model ELearning.Models.Question
+
+@{
+    ViewData["Title"] = "Modifica intrebare";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/questions.js"></script>
+}
+
+<form asp-action="Edit" style="margin-top:5rem;" class="create-question-form">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="Status" hidden />
+    <input asp-for="StudentId" hidden />
+    <input asp-for="Id" hidden />
+    <input asp-for="Comment" hidden />
+    <input asp-for="Difficulty" hidden />
+    <div class="text-info"></div>
+    <div class="form-group row">
+        <select asp-for="Assignment" asp-items="@ViewBag.Assignment" class="form-control" disabled></select>
+    </div>
+    <div class="form-group row">
+        <textarea asp-for="Text" class="form-control" placeholder="Intrebare" required></textarea>
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+    <div id="answers-container">
+        @foreach (var a in Model.Answers)
+        {
+            <div class="form-group row answer-row">
+                <input type="checkbox" checked="@a.Correct" />
+                <input type="text" class="form-control" placeholder="Raspuns" value="@a.Text" required />
+                <span asp-validation-for="@a.Text" class="text-danger"></span>
+            </div>
+        }
+    </div>
+    <div class="form-group row">
+        <input type="button" value="+" class="tm-btn" id="add-answer-button" />
+    </div>
+    <div class="form-group row">
+        <div class="right-buttons">
+            <input type="submit" value="Retrimite" class="tm-btn right-buttons" />
+        </div>
+        <input type="button" value="Inapoi" class="tm-btn" />
+    </div>
+</form>

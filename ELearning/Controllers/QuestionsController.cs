@@ -83,22 +83,32 @@ namespace ELearning.Controllers
             return View(question);
         }
 
-        // POST: Assignments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Text, Status, StudentId, Answers")] Question question)
+
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (id != question.Id)
+            if (id == null)
             {
                 return NotFound();
             }
 
+            var question = await _context.Questions.AsNoTracking().Include(q => q.Answers).SingleOrDefaultAsync(m => m.Id == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            var currentAssignment = await _context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).FirstOrDefaultAsync(a => a.Id == question.AssignmentId);
+            ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == 4), "Id", "ComposedName", currentAssignment.ComposedName);
+            return View(question);
+        }
+
+        [HttpPost]
+        public async Task<string> Edit(Question question)
+        {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    question.Status = QuestionStatus.Pending;
                     _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
@@ -106,16 +116,16 @@ namespace ELearning.Controllers
                 {
                     if (!QuestionExists(question.Id))
                     {
-                        return NotFound();
+                        return "";
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(IncomingQuestions));
+                return "Intrebare trimisa cu succes!";
             }
-            return View(question);
+            return "Completeaza cu date valide!";
         }
 
         private bool QuestionExists(int id)
@@ -212,7 +222,28 @@ namespace ELearning.Controllers
             var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return BadRequest();
-            return View(student.Questions.Where(q => q.Status == QuestionStatus.Rejected));
+            var questions = student.Questions.Where(q => q.Status == QuestionStatus.Rejected);
+            foreach(var q in questions)
+            {
+                var assignment = await _context.Assignments.AsNoTracking().Include(a => a.Professor).FirstOrDefaultAsync(a => a.Id == q.AssignmentId);
+                q.ProfessorName = assignment.Professor.FullName;
+            }
+            return View(questions);
+        }
+
+        public async Task<IActionResult> Summary(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var question = await _context.Questions.AsNoTracking().Include(q => q.Answers).SingleOrDefaultAsync(m => m.Id == id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return View(question);
         }
 
     }

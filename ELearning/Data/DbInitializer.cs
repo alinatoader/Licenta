@@ -63,13 +63,13 @@ namespace ELearning.Data
             var questions = new Question[]
             {
                 new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
                 new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 3},
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4},
+                new Question{Text = "Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Rejected, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4, Comment = "Nu e destul de buna. Te rog sa mai incerci!"},
                 new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
                 new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Rejected, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3, Comment = "Nu se ridica la nivelul asteptarilor. Te credeam mai inteligent!"},
                 new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 4},
                 new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
             };

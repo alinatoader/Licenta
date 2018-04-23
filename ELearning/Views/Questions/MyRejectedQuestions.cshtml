@@ -31,13 +31,12 @@
 </div>
 @foreach (var q in Model)
 {
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 question-box">
-        <div class="tm-content-box">
-            <p class="tm-margin-b-20">
-                @q.Text
-            </p>
-            <a asp-action="Details" asp-route-id="@q.Id" class="tm-btn text-uppercase">Detalii</a>
-        </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 question-box">
+        <p class="tm-margin-b-20">
+            @q.Text
+        </p>
+        <p>@q.ProfessorName: <span class="text-danger">@q.Comment</span></p>
+        <a asp-action="Edit" asp-route-id="@q.Id" class="tm-btn text-uppercase">Modifica</a>
     </div>
 }
 

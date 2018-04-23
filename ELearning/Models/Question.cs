@@ -29,6 +29,7 @@ namespace ELearning.Models
         public QuestionStatus? Status { get; set; }
         [Display(Name = "Dificultate")]
         public QuestionDifficulty? Difficulty { get; set; }
+        public string ProfessorName { get; set; }
         [ForeignKey("Student")]
         public int? StudentId { get; set; }
         public virtual Student Student { get; set; }
