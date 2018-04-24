@@ -14,8 +14,11 @@ namespace ELearning.Models
 
     public enum QuestionDifficulty
     {
-        Easy, 
+        [Display(Name ="Usor")]
+        Easy,
+        [Display(Name = "Mediu")]
         Medium,
+        [Display(Name = "Greu")]
         Hard
     }
     public class Question

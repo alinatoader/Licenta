@@ -36,7 +36,8 @@
             <p class="tm-margin-b-20">
                 @q.Text
             </p>
-            <a asp-action="Summary" asp-route-id="@q.Id" class="tm-btn text-uppercase">Detalii</a>
+            <button class="tm-btn text-uppercase summary-button">Detalii</button>
+            @Html.Partial("SummaryPopup.cshtml", q)
         </div>
     </div>
 }

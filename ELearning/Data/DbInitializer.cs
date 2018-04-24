@@ -112,6 +112,15 @@ namespace ELearning.Data
             context.Answers.AddRange(answers);
             context.SaveChanges();
 
+            var questionConcepts = new QuestionConcept[]
+            {
+                new QuestionConcept(){QuestionId=2, ConceptId=1},
+                new QuestionConcept(){QuestionId=2, ConceptId=3},
+                new QuestionConcept(){QuestionId=2, ConceptId=2},
+                new QuestionConcept(){QuestionId=3, ConceptId=4},
+            };
+            context.QuestionConcepts.AddRange(questionConcepts);
+            context.SaveChanges();
 
         }
     }

@@ -1,0 +1,42 @@
+﻿@model ELearning.Models.Question
+
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title "><span class="tm-gold-text">@Model.Text</span> (Incadrat la: @Model.Difficulty)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h6 class="modal-title">@Model.Assignment.ComposedName</h6>
+            </div>
+            <div class="modal-body">
+                @{ var color = "";}
+                <ul>
+                    @foreach (var a in @Model.Answers)
+                    {
+                        @if (a.Correct)
+                        { color = "green"; }
+                        else
+                        { color = "red"; }
+                        <li>
+                            <svg width="10" height="10">
+                                <circle cx="5" cy="5" r="4" fill="@color" />
+                            </svg>&nbsp;@a.Text
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="modal-footer" style="text-align:left;">
+                Concepte:
+                @foreach (var c in Model.QuestionConcepts)
+                {
+                    <span>
+                        #
+                        <span class="tm-gold-text">@c.Concept.Name</span>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+</div> 

@@ -201,10 +201,11 @@ namespace ELearning.Controllers
         public async Task<IActionResult> MyAcceptedQuestions(int id)
         {
             id = 1;
-            var student = await _context.Students.AsNoTracking().Include(s=>s.Questions).FirstOrDefaultAsync(s => s.Id == id);
+            var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return BadRequest();
-            return View(student.Questions.Where(q => q.Status == QuestionStatus.Accepted));
+            var questions = await _context.Questions.AsNoTracking().Include(q => q.Answers).Include(q => q.Assignment).Include(q => q.Assignment.Concept).Include(q => q.Assignment.Professor).Include(q => q.QuestionConcepts).ThenInclude(qc => qc.Concept).Where(q => q.StudentId == student.Id && q.Status == QuestionStatus.Accepted).ToListAsync();
+            return View(questions);
         }
 
         public async Task<IActionResult> MyPendingQuestions(int id)
@@ -223,7 +224,7 @@ namespace ELearning.Controllers
             if (student == null)
                 return BadRequest();
             var questions = student.Questions.Where(q => q.Status == QuestionStatus.Rejected);
-            foreach(var q in questions)
+            foreach (var q in questions)
             {
                 var assignment = await _context.Assignments.AsNoTracking().Include(a => a.Professor).FirstOrDefaultAsync(a => a.Id == q.AssignmentId);
                 q.ProfessorName = assignment.Professor.FullName;

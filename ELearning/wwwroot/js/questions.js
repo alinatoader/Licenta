@@ -51,4 +51,8 @@
     });
 
     $('#back-target').attr('href', localStorage.getItem('previous'));
+
+    $('.summary-button').click(function () {
+        $(this).next('.modal').modal('show');
+    });
 });
