@@ -23,11 +23,14 @@ namespace ELearning.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int? id)
         {
             var student = await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
-            ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == student.GroupId), "Id", "ComposedName");
-            return View(new Question { Status = QuestionStatus.Pending, Answers = new List<Answer> { new Answer(), new Answer(), new Answer() } });
+            if (id != null)
+                ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == student.GroupId), "Id", "ComposedName", (int)id);
+            else
+                ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == student.GroupId), "Id", "ComposedName");
+            return View(new Question { AssignmentId = id != null ? (int)id : 0, Status = QuestionStatus.Pending, Answers = new List<Answer> { new Answer(), new Answer(), new Answer() } });
         }
 
         [HttpPost]

@@ -49,7 +49,7 @@ namespace ELearning.Controllers
         // GET: Assignments/Create
         public IActionResult Create()
         {
-            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id","Name");
+            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name");
             ViewData["Concept"] = new SelectList(_context.Concepts.AsNoTracking(), "Id", "Name");
             return View();
         }
@@ -64,7 +64,7 @@ namespace ELearning.Controllers
             if (ModelState.IsValid)
             {
                 var group = _context.Groups.AsNoTracking().FirstOrDefault(g => g.Name == assignment.Group.Name);
-                if(group == null)
+                if (group == null)
                 {
                     group = new Group() { Name = assignment.Group.Name };
                     _context.Add(group);
@@ -181,14 +181,43 @@ namespace ELearning.Controllers
             return _context.Assignments.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> StudentAssignments(int id)
+        [HttpGet]
+        public async Task<IActionResult> MyAssignments()
         {
-            var user = await _context.Students.AsNoTracking().Include(u=>u.Group).Include(u=>u.Group.Assignments).FirstOrDefaultAsync(u => u.Id == id);
-            if(user == null)
+            var assignments = await FindMyAssignments();
+            var profs = assignments.Select(a => a.Professor).Distinct().ToList();
+            profs.Add(new Professor { FirstName = "Toti", LastName = "" });
+            ViewData["Professors"] = new SelectList(profs, "Id", "FullName");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MyAssignments(AssignmentViewModel model)
+        {
+            var assignments = await FindMyAssignments();
+            if (model.ProfessorId > 0)
+                assignments = assignments.Where(a => a.ProfessorId == model.ProfessorId).ToList();
+            if (model.DeadlineSortDir == 0)
+                assignments = assignments.OrderBy(a => a.Deadline).ToList();
+            else assignments = assignments.OrderByDescending(a => a.Deadline).ToList();
+            model.Assignments = assignments;
+            var profs = assignments.Select(a => a.Professor).Distinct().ToList();
+            profs.Add(new Professor { FirstName = "Toti", LastName = "" });
+            ViewData["Professors"] = new SelectList(profs, "Id", "FullName", model.ProfessorId);
+            return View(model);
+
+        }
+
+        private async Task<ICollection<Assignment>> FindMyAssignments()
+        {
+            var id = 1;
+            var user = await _context.Students.AsNoTracking().Include(u => u.Group).FirstOrDefaultAsync(u => u.Id == id);
+            if (user == null)
             {
-                return NotFound();
+                return null;
             }
-            return View(user.Group.Assignments);
+            var assignments = await _context.Assignments.AsNoTracking().Include(a => a.Professor).Include(a => a.Concept).Where(a => a.GroupId == user.GroupId).ToListAsync();
+            return assignments;
         }
     }
 }

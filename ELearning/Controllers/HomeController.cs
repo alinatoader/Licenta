@@ -13,7 +13,7 @@ namespace ELearning.Controllers
             //daca e profesor
             //return RedirectToAction("IncomingQuestions", "Questions");
             //daca e student
-            return RedirectToAction("Create", "Questions", new { id = 1 });
+            return RedirectToAction("Create", "Questions");
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model ELearning.Models.AssignmentViewModel
+
+@{
+    ViewData["Title"] = "Temele mele";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/assignments.js"></script>
+}
+
+<form asp-action="MyAssignments">
+    <div class="form-group">
+        <select asp-for="ProfessorId" asp-items="@ViewBag.Professors" class="form-control" style="display:inline-block; width:40%;">
+            <option style="display:none;" selected>Selecteaza profesor</option>
+        </select>
+        <select asp-for="DeadlineSortDir" class="form-control" style="display:inline-block; width:20%;">
+            <option style="display:none;" selected>Sorteaza deadline</option>
+            <option value="0">Crescator</option>
+            <option value="1">Descrescator</option>
+        </select>
+        <input type="submit" value="Afiseaza rezultate" class="tm-btn" />
+    </div>
+</form>
+
+@if (Model != null && Model.Assignments != null)
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Profesor</th>
+                    <th>Concept</th>
+                    <th>Deadline</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model.Assignments)
+                {
+                    <tr>
+                        <td>@a.Professor.FullName</td>
+                        <td>@a.Concept.Name</td>
+                        <td>@a.Deadline.ToLongDateString()</td>
+                        <td><a asp-controller="Questions" asp-action="Create" asp-route-id="@a.Id" title="Creeaza intrebare"><img src="~/img/plane.ico" style="width:30px;" /></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

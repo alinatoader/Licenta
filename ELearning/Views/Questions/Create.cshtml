@@ -34,7 +34,14 @@
     <input asp-for="Difficulty" hidden />
     <div class="text-info"></div>
     <div class="form-group row">
-        <select asp-for="Assignment" asp-items="@ViewBag.Assignment" class="form-control"></select>
+        @if (Model.AssignmentId > 0)
+        {
+            <select asp-for="Assignment" asp-items="@ViewBag.Assignment" class="form-control" disabled></select>
+        }
+        else
+        {
+            <select asp-for="Assignment" asp-items="@ViewBag.Assignment" class="form-control"></select>
+        }
     </div>
     <div class="form-group row">
         <textarea asp-for="Text" class="form-control" placeholder="Intrebare" required></textarea>
@@ -44,12 +51,12 @@
     <div id="answers-container">
         <div class="form-group row answer-row">
             <input type="checkbox" />
-            <input type="text" class="form-control" placeholder="Raspuns" required/>
+            <input type="text" class="form-control" placeholder="Raspuns" required />
             <span asp-validation-for="Text" class="text-danger"></span>
         </div>
         <div class="form-group row answer-row">
             <input type="checkbox" />
-            <input type="text" class="form-control" placeholder="Raspuns" required/>
+            <input type="text" class="form-control" placeholder="Raspuns" required />
             <span asp-validation-for="Text" class="text-danger"></span>
         </div>
     </div>
