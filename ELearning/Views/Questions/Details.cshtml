@@ -10,18 +10,18 @@
 
 <div class="row tm-margin-t-mid">
     <div class="col-xs-12">
-        <h3 class="tm-gold-text">Trimisa de: @Model.Student.FirstName @Model.Student.LastName</h3>
+        <h3 class="tm-gold-text">Intrebare trimisa de @Model.Student.FullName din Grupa @Model.Student.Group.Name</h3>
     </div>
 </div>
-<form asp-action="Save">
+<form asp-action="Save" id="question-detail-form">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <input asp-for="Status" hidden />
     <input asp-for="StudentId" hidden />
     <input asp-for="Id" hidden />
-
+    <input asp-for="AssignmentId" hidden />
     <div class="form-group row">
-        <textarea asp-for="Text" class="form-control"></textarea>
+        <textarea asp-for="Text" class="form-control" required></textarea>
         <span asp-validation-for="Text" class="text-danger"></span>
     </div>
 
@@ -36,10 +36,25 @@
         </div>
     }
     <div class="form-group row">
+        <div class="col-md-5">
+            <label asp-for="Difficulty"></label>
+            <select asp-for="Difficulty" asp-items="@Html.GetEnumSelectList<QuestionDifficulty>()" class="form-control" style="width:40%"></select>
+            <span asp-validation-for="Difficulty" class="text-danger"></span>
+            <br />
+            <textarea asp-for="Comment" class="form-control" rows=5 placeholder="Sugestii"></textarea>
+            <span asp-validation-for="Comment" class="text-danger"></span>
+        </div>
+        <div class="col-md-7">
+            <label asp-for="QuestionConcepts"></label><br />
+            <select asp-items="@ViewBag.Concepts" class="form-control" multiple style="height:234px;" id="Concepts" required></select>
+            <span class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
         <a asp-action="IncomingQuestions" class="tm-btn">Inapoi</a>
         <div class="right-buttons">
             <a asp-action="RejectQuestion" asp-route-id="@Model.Id" class="tm-btn reject-button">Respinge</a>
-            <input type="submit" value="Salveaza" class="tm-btn" />
+            <input type="submit" value="Accepta" class="tm-btn" />
         </div>
     </div>
 </form>

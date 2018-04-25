@@ -14,7 +14,7 @@ namespace ELearning.Models
 
     public enum QuestionDifficulty
     {
-        [Display(Name ="Usor")]
+        [Display(Name = "Usor")]
         Easy,
         [Display(Name = "Mediu")]
         Medium,
@@ -41,6 +41,7 @@ namespace ELearning.Models
         public virtual Assignment Assignment { get; set; }
         public virtual IList<Answer> Answers { get; set; }
         public virtual ICollection<TestQuestion> TestQuestions { get; set; }
+        [Display(Name = "Concepte")]
         public virtual ICollection<QuestionConcept> QuestionConcepts { get; set; }
 
     }

@@ -25,7 +25,7 @@
 
                     <div class="collapse navbar-toggleable-sm" id="tmNavbar">
                         <ul class="nav navbar-nav">
-                            @*<li class="nav-item">
+                            <li class="nav-item">
                                 <a asp-controller="Questions" asp-action="IncomingQuestions" class="nav-link">Intrebari</a>
                             </li>
                             <li class="nav-item">
@@ -33,8 +33,8 @@
                             </li>
                             <li class="nav-item">
                                 <a asp-controller="Tests" asp-action="CreateRandom" class="nav-link">Teste</a>
-                            </li>*@
-                            <li class="nav-item">
+                            </li>
+                            @*<li class="nav-item">
                                     <a asp-controller="Questions" asp-action="Create" class="nav-link">Intrebari</a>
                                 </li>
                                 <li class="nav-item">
@@ -42,7 +42,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a asp-controller="Tests" asp-action="CreateRandom" class="nav-link">Teste</a>
-                                </li>
+                                </li>*@
                         </ul>
                     </div>
 
@@ -61,7 +61,7 @@
             @RenderBody()
         </div>
     </section>
-
+    @* <script src="~/lib/bootstrap-select-1.12.4/dist/js/i18n/defaults-ar_AR.min.js" asp-append-version="true"></script>*@
     <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
     <script src="~/lib/clasic-template/js/jquery-1.11.3.min.js" asp-append-version="true"></script>

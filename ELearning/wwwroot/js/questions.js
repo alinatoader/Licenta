@@ -35,7 +35,7 @@
             var ansText = $(item).find('input[type="text"]').val();
             answers.push({ Correct: correct, Text: ansText });
         });
-        var question = { Text: text, StudentId: 1, AssignmentId: 1, Answers: answers };
+        var question = { Text: text, StudentId: 1, AssignmentId: assignmentId, Answers: answers };
         $.ajax({
             type: 'POST',
             url: $('.create-question-form:visible').attr('action'),
@@ -54,5 +54,51 @@
 
     $('.summary-button').click(function () {
         $(this).next('.modal').modal('show');
+    });
+
+    $('#question-detail-form').submit(function () {
+        event.preventDefault();
+        var concepts = $('#Concepts').val();
+        var assignmentId = Number(document.getElementById('AssignmentId').value);
+        var text = document.getElementById('Text').value;
+        var answers = [];
+        var questionId = $('#Id').val();
+        var comment = $('#Comment').val();
+        var status = $('#Status').val();
+        var studentId = $('#StudentId').val();
+        var dif = $('#Difficulty').val();
+        $('.answer-row').each(function (index, item) {
+            var correct = $(item).find('input[type="checkbox"]').is(':checked');
+            var ansText = $(item).find('input[type="text"]').val();
+            var id = $('#Answers_' + index + '__Id').val();
+            answers.push({ Correct: correct, Text: ansText, Id: id, QuestionId: questionId });
+        });
+        var qconcepts = [];
+        for (var i = 0; i < concepts.length; i++) {
+            qconcepts.push({ QuestionId: questionId, ConceptId: concepts[i] });
+        }
+        var question = {
+            Text: text,
+            StudentId: studentId,
+            AssignmentId: assignmentId,
+            Answers: answers,
+            Id: questionId,
+            Comment: comment,
+            Status: status,
+            Difficulty: dif,
+            QuestionConcepts: qconcepts
+        };
+        $.ajax({
+            type: 'POST',
+            url: $('#question-detail-form').attr('action'),
+            data: question,
+            dataType: 'json',
+            success: function (response) {
+                window.location.href = '/Questions/IncomingQuestions';
+            },
+            error: function (response) {
+                window.location.href = '/Questions/IncomingQuestions';
+            }
+        });
     });
 });

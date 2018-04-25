@@ -42,6 +42,8 @@ namespace ELearning.Controllers
                 if (exists == null)
                 {
                     question.Status = QuestionStatus.Pending;
+                    var assignment = await _context.Assignments.AsNoTracking().FirstOrDefaultAsync(a => a.Id == question.AssignmentId);
+                    question.QuestionConcepts = new List<QuestionConcept>() { new QuestionConcept() { ConceptId = assignment.ConceptId } };
                     await _context.AddAsync(question);
                     await _context.SaveChangesAsync();
                     return "Intrebare adaugata cu succes!";
@@ -78,11 +80,13 @@ namespace ELearning.Controllers
                 return NotFound();
             }
 
-            var question = await _context.Questions.AsNoTracking().Include(q => q.Answers).Include(q => q.Student).SingleOrDefaultAsync(m => m.Id == id);
+            var question = await _context.Questions.AsNoTracking().Include(q => q.Answers).Include(q => q.Student).ThenInclude(s => s.Group).SingleOrDefaultAsync(m => m.Id == id);
             if (question == null)
             {
                 return NotFound();
             }
+
+            ViewData["Concepts"] = new SelectList(await _context.QuestionConcepts.AsNoTracking().Include(qc => qc.Concept).Select(qc => qc.Concept).ToListAsync(), "Id", "Name");
             return View(question);
         }
 
@@ -137,36 +141,24 @@ namespace ELearning.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Save(int id, [Bind("Id, Text, Status, StudentId, Answers")] Question question)
+        public void Save(Question question)
         {
-            if (id != question.Id)
+            try
             {
-                return NotFound();
+                var q = _context.Questions.AsNoTracking().FirstOrDefault(qq => qq.Id == question.Id);
+                q.QuestionConcepts = question.QuestionConcepts;
+                q.Answers = question.Answers;
+                q.Comment = question.Comment;
+                q.Difficulty = question.Difficulty;
+                q.Text = question.Text;
+                q.Status = QuestionStatus.Accepted;
+                _context.Update(q);
+                _context.SaveChanges();
             }
-
-            if (ModelState.IsValid)
+            catch (DbUpdateConcurrencyException)
             {
-                try
-                {
-                    question.Status = QuestionStatus.Accepted;
-                    _context.Update(question);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!QuestionExists(question.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(IncomingQuestions));
+                throw;
             }
-            return View(question);
         }
 
         public async Task<IActionResult> RejectQuestion(int? id)
