@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using ELearning.Data;
 using ELearning.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace ELearning.Controllers
 {
@@ -18,39 +20,37 @@ namespace ELearning.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> CreateRandom()
+        public IActionResult SelectSections()
         {
-            return View(new TestViewModel() { Questions = new List<Question>(), MaxNoQuestions = await _context.Questions.AsNoTracking().Include(q => q.Answers).CountAsync() });
+            ViewData["Concepts"] = new SelectList(_context.Concepts.AsNoTracking().ToList(), "Id", "Name");
+            return View();
         }
-
+        
         [HttpPost]
-        public async Task<IActionResult> CreateRandom([Bind("NoQuestions")]TestViewModel model)
+        public async Task<IActionResult> GenerateTest(Test test)
         {
-            if (ModelState.IsValid)
+            Random random = new Random();
+            foreach(var section in test.Sections)
             {
-                Random a = new Random();
-                List<int> indexes = new List<int>();
-                var questions = await _context.Questions.AsNoTracking().Include(q => q.Answers).ToListAsync();
-                if (model.NoQuestions > questions.Count)
-                    model.NoQuestions = questions.Count;
-                if (model.NoQuestions == questions.Count)
-                    model.Questions = questions;
-                else
+                var questions = await _context.Questions.AsNoTracking().Where(q => q.QuestionConcepts.Any(qc => qc.ConceptId == section.ConceptId) && q.Difficulty == section.Difficulty).ToListAsync();
+                for(int i = 0; i < section.NumberOfQuestions; i++)
                 {
-                    for (var i = 0; i < model.NoQuestions; i++)
-                    {
-                        int nr = a.Next(0, questions.Count - 1);
-                        if (!indexes.Contains(nr))
-                            indexes.Add(nr);
-                    }
-                    model.Questions = new List<Question>();
-                    foreach (var index in indexes)
-                    {
-                        model.Questions.Add(questions.ElementAt(index));
-                    }
+                    var index = random.Next(0, questions.Count);
+                    test.TestQuestions = new List<TestQuestion>();
+                    test.TestQuestions.Add(new TestQuestion() { QuestionId = questions.ElementAt(index).Id });
+                    questions.RemoveAt(index);
+                    if (questions.Count == 0)
+                        i = section.NumberOfQuestions + 1;
                 }
             }
-            return View(model);
+            TempData["Test"] = JsonConvert.SerializeObject(test);
+            return StatusCode(200);
+        }
+
+        public IActionResult Edit()
+        {
+            var test = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
+            return View(test);
         }
     }
 }

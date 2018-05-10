@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Configureaza test";
+    var color = "";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/tests.js" asp-append-version="true"></script>
+}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-xs-center">
+        <h2 class="tm-gold-text tm-title">Configureaza sectiuni test</h2>
+    </div>
+</div>
+<form asp-action="GenerateTest">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div id="sections-container">
+        <div class="form-group ">
+            <input type="number" min="1" class="form-control" style="display:inline-block; width:10%;" value="1" />
+            <select asp-items="@ViewBag.Concepts" class="form-control" style="display:inline-block; width:25%;" id="concept-selector"></select>
+            <select asp-items="@Html.GetEnumSelectList<QuestionDifficulty>()" class="form-control" style="display:inline-block; width:15%;" id="difficulty-selector"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="button" value="+" class="tm-btn" id="add-section-button" style="padding: 5px 10px;"/>
+    </div>
+    <input type="submit" value="Genereaza test" class="tm-btn right-buttons" id="generate-test-button"/>
+</form>
+
+

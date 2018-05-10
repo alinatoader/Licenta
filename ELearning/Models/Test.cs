@@ -14,6 +14,7 @@ namespace ELearning.Models
         public int Name { get; set; }
         [ForeignKey("Professor")]
         public int ProfessorId { get; set; }
+        public  ICollection<TestSection> Sections { get; set; }
         public virtual Professor Professor { get; set; }
         public virtual ICollection<TestQuestion> TestQuestions { get; set; }
         public virtual ICollection<Evaluation> Evaluations { get; set; }
