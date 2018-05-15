@@ -78,3 +78,11 @@ ul {
     padding: 20px;
 }
 
+.answer-input {
+    width: 10%;
+    display: inline-block;
+}
+
+.corectness-of-answers {
+    display: none;
+}

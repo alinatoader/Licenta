@@ -107,8 +107,33 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var tests = await _context.Tests.Include(t => t.Professor).AsNoTracking().ToListAsync();
+            var tests = await _context.Tests.Include(t => t.Professor).AsNoTracking().Where(t => t.StudentId == null).ToListAsync();
             return View(tests);
+        }
+
+        public async Task<IActionResult> StudentIndex()
+        {
+            var tests = await _context.Tests.Include(t => t.Professor).AsNoTracking().Where(t => t.StudentId == null || t.StudentId == 1).ToListAsync();
+            return View(tests);
+        }
+
+        public async Task<IActionResult> TakeTest()
+        {
+            var test = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
+            TempData.Keep();
+            foreach (var section in test.Sections)
+            {
+                section.Concept = await _context.Concepts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == section.ConceptId);
+                foreach (var question in section.SectionQuestions)
+                    question.Question = await _context.Questions.AsNoTracking().Include(q => q.Answers).FirstOrDefaultAsync(q => q.Id == question.QuestionId);
+            }
+            return View(test);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TakeTest(TestViewModel test)
+        {
+            return StatusCode(200);
         }
     }
 }

@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace ELearning.Models
 {
-    public class TestViewModel
+    public class QuestionViewModel
     {
-        public string Name { get; set; }
-        public ICollection<QuestionViewModel> Questions { get; set; }
+        public int QuestionId { get; set; }
+        public ICollection<int> AnswerIds { get; set; }
     }
+    
 }

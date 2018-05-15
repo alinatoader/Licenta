@@ -13,5 +13,6 @@ namespace ELearning.Models
         public virtual Group Group { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
         public virtual ICollection<Evaluation> Evaluations { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

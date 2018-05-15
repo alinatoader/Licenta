@@ -1,0 +1,54 @@
+﻿@model ELearning.Models.Test
+
+@{
+    ViewData["Title"] = "Evaluare";
+    var color = "";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/tests.js"></script>
+}
+
+<form asp-action="">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <input asp-for="Name" class="form-control" type="text" placeholder="Titlul testului" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+
+    @foreach (var sectionn in Model.Sections)
+    {
+        <div class="section-container">
+            <h4 class="tm-gold-text tm-title">@sectionn.Concept.Name</h4>
+            @foreach (var question in sectionn.SectionQuestions)
+            {
+                <div class="question-container">
+                    <h5>@question.Question.Text</h5>
+                    <input type="number" value="@question.QuestionId" hidden />
+                    <ul>
+                        @foreach (var a in question.Question.Answers)
+                        {
+
+                            <li>
+                                <input type="number" value="@a.Id" hidden />
+                                @if (a.Correct)
+                                { color = "green"; }
+                                else
+                                { color = "red"; }
+                                <svg width="10" height="10" class="corectness-of-answers">
+                                    <circle cx="5" cy="5" r="4" fill="@color" />
+                                </svg>
+                                <input type="checkbox" class="form-control answer-input" /> @a.Text
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    }
+    <div class="form-group">
+        <input type="submit" value="Vezi rezultat" class="tm-btn right-buttons" id="finish-test-button" />
+    </div>
+</form>
+

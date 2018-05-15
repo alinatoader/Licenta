@@ -35,7 +35,10 @@
             url: '/Tests/GenerateTest',
             data: test,
             success: function (response) {
-                window.location.href = '/Tests/Edit';
+                //daca e prof
+                //window.location.href = '/Tests/Edit';
+                //daca e student
+                window.location.href = '/Tests/TakeTest';
             },
             error: function (response) {
                 console.log('error');
@@ -57,5 +60,35 @@
                 console.log('error');
             }
         });
-    })
+    });
+
+    $('#finish-test-button').click(function () {
+        event.preventDefault();
+        var questions = [];
+        $('.question-container').each(function (index, item) {
+            var questionId = $(item).find('input[type="number"]')[0].value;
+            var answersIds = [];
+            $(item).find('li').each(function (i, box) {
+                var answer = $(box).find('input[type="checkbox"]');
+                if ($(answer[0]).prop('checked') == true)
+                    answersIds.push($(box).find('input[type="number"]')[0].value);
+
+            });
+            questions.push({ QuestionId: questionId, AnswerIds: answersIds });
+        });
+        var test = {
+            Name: $('#Name').val(), Questions: questions
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/Tests/TakeTest',
+            data: test,
+            success: function (response) {
+                $('.corectness-of-answers').show();
+            },
+            error: function (response) {
+                console.log('error');
+            }
+        });
+    });
 });
