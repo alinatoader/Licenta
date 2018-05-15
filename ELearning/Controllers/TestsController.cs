@@ -117,15 +117,36 @@ namespace ELearning.Controllers
             return View(tests);
         }
 
-        public async Task<IActionResult> TakeTest()
+        public async Task<IActionResult> TakeTest(int? id)
         {
-            var test = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
-            TempData.Keep();
-            foreach (var section in test.Sections)
+            var test = new Test();
+            if (id == null)
             {
-                section.Concept = await _context.Concepts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == section.ConceptId);
-                foreach (var question in section.SectionQuestions)
-                    question.Question = await _context.Questions.AsNoTracking().Include(q => q.Answers).FirstOrDefaultAsync(q => q.Id == question.QuestionId);
+                test = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
+                TempData.Keep();
+                foreach (var section in test.Sections)
+                {
+                    section.Concept = await _context.Concepts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == section.ConceptId);
+                    foreach (var question in section.SectionQuestions)
+                        question.Question = await _context.Questions.AsNoTracking().Include(q => q.Answers).FirstOrDefaultAsync(q => q.Id == question.QuestionId);
+                }
+            }
+            else
+            {
+                test = await _context.Tests.AsNoTracking().Include(t => t.Sections).FirstOrDefaultAsync(t => t.Id == id);
+                TempData["Test"] = JsonConvert.SerializeObject(new Test() { Id = test.Id, StudentId = test.StudentId, Name = test.Name });
+                foreach (var section in test.Sections)
+                {
+                    var fullSection = await _context.Sections.AsNoTracking().Include(s => s.SectionQuestions).FirstOrDefaultAsync(ss => ss.Id == section.Id);
+                    section.SectionQuestions = fullSection.SectionQuestions;
+                }
+
+                foreach (var section in test.Sections)
+                {
+                    section.Concept = await _context.Concepts.AsNoTracking().FirstOrDefaultAsync(c => c.Id == section.ConceptId);
+                    foreach (var question in section.SectionQuestions)
+                        question.Question = await _context.Questions.AsNoTracking().Include(q => q.Answers).FirstOrDefaultAsync(q => q.Id == question.QuestionId);
+                }
             }
             return View(test);
         }
@@ -135,18 +156,21 @@ namespace ELearning.Controllers
         {
             var noCorrectAnswers = 0;
             var model = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
-            model.StudentId = 1;
-            model.Name = test.Name;
-            await _context.Tests.AddAsync(model);
-            await _context.SaveChangesAsync();
+            if (model.Id == 0)
+            {
+                model.StudentId = 1;
+                model.Name = test.Name;
+                await _context.Tests.AddAsync(model);
+                await _context.SaveChangesAsync();
+            }
 
             foreach (var question in test.Questions)
             {
                 var isCorrect = true;
-                foreach(var answerId in question.AnswerIds)
+                foreach (var answerId in question.AnswerIds)
                 {
                     var fullAnswer = await _context.Answers.AsNoTracking().FirstOrDefaultAsync(a => a.Id == answerId);
-                    if(!fullAnswer.Correct)
+                    if (!fullAnswer.Correct)
                     {
                         isCorrect = false;
                         break;
@@ -155,9 +179,9 @@ namespace ELearning.Controllers
                 if (isCorrect)
                     noCorrectAnswers++;
             }
-            
-            var percentage = noCorrectAnswers / (double) test.Questions.Count * 100;
-            var eval = new Evaluation() { TestId = model.Id, StudentId = (int) model.StudentId, Percentage = percentage };
+
+            var percentage = noCorrectAnswers / (double)test.Questions.Count * 100;
+            var eval = new Evaluation() { TestId = model.Id, StudentId = (int)model.StudentId, Percentage = percentage };
             await _context.Evaluations.AddAsync(eval);
             await _context.SaveChangesAsync();
             return StatusCode(200, percentage);
