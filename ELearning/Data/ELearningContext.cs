@@ -22,7 +22,8 @@ namespace ELearning.Data
         public DbSet<Test> Tests { get; set; }
         public DbSet<Concept> Concepts { get; set; }
         public DbSet<QuestionConcept> QuestionConcepts { get; set; }
-        public DbSet<TestQuestion> TestQuestions { get; set; }
+        public DbSet<SectionQuestion> TestQuestions { get; set; }
         public DbSet<Evaluation> Evaluations { get; set; }
+        public DbSet<Section> Sections { get; set; }
     }
 }

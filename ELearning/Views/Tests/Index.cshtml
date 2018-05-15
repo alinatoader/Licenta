@@ -1,0 +1,37 @@
+﻿@model IEnumerable<ELearning.Models.Test>
+
+@{
+    ViewData["Title"] = "Teste";
+}
+
+<a asp-action="SelectSections" class="tm-btn right-buttons">Creeaza test nou</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Profesor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Professor.FullName)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="tm-btn">Detalii</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

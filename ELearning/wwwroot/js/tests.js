@@ -42,4 +42,20 @@
             }
         });
     });
+
+    $('#save-test-button').click(function () {
+        event.preventDefault();
+        var name = $('#Name').val();
+        $.ajax({
+            type: 'POST',
+            url: '/Tests/SaveTest',
+            data: { Name: name },
+            success: function (response) {
+                window.location.href = "/Tests/Index";
+            },
+            error: function (response) {
+                console.log('error');
+            }
+        });
+    })
 });

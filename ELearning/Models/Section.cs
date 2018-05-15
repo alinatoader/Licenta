@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ELearning.Models
 {
-    public class TestSection
+    public class Section
     {
         [Key]
         public int Id { get; set; }
@@ -16,5 +16,6 @@ namespace ELearning.Models
         public virtual Concept Concept { get; set; }
         public QuestionDifficulty Difficulty { get; set; }
         public int NumberOfQuestions { get; set; }
+        public virtual ICollection<SectionQuestion> SectionQuestions { get; set; }
     }
 }
