@@ -85,6 +85,10 @@
             data: test,
             success: function (response) {
                 $('.corectness-of-answers').show();
+                $('#finish-test-button').hide();
+                $('#back-to-tests-button').show();
+                $('.modal-body h3').html(response + " %");
+                $('.modal').modal('show');
             },
             error: function (response) {
                 console.log('error');

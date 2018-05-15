@@ -17,6 +17,6 @@ namespace ELearning.Models
         [ForeignKey("Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
-        public int Percentage { get; set; }
+        public double Percentage { get; set; }
     }
 }

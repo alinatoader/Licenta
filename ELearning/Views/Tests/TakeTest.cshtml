@@ -47,8 +47,20 @@
             }
         </div>
     }
-    <div class="form-group">
-        <input type="submit" value="Vezi rezultat" class="tm-btn right-buttons" id="finish-test-button" />
+    <div class="form-group right-buttons">
+        <a asp-action="StudentIndex" class="tm-btn" style="display:none;" id="back-to-tests-button">Inapoi la teste</a>
+        <input type="submit" value="Vezi rezultat" class="tm-btn" id="finish-test-button" />
     </div>
 </form>
+
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="text-align:center; width:250px;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Rezultatul tau: </h4>
+                <h3 class="tm-gold-text"></h3>
+            </div>
+        </div>
+    </div>
+</div>
 

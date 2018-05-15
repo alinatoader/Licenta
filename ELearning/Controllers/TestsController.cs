@@ -133,7 +133,34 @@ namespace ELearning.Controllers
         [HttpPost]
         public async Task<IActionResult> TakeTest(TestViewModel test)
         {
-            return StatusCode(200);
+            var noCorrectAnswers = 0;
+            var model = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
+            model.StudentId = 1;
+            model.Name = test.Name;
+            await _context.Tests.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            foreach (var question in test.Questions)
+            {
+                var isCorrect = true;
+                foreach(var answerId in question.AnswerIds)
+                {
+                    var fullAnswer = await _context.Answers.AsNoTracking().FirstOrDefaultAsync(a => a.Id == answerId);
+                    if(!fullAnswer.Correct)
+                    {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+                if (isCorrect)
+                    noCorrectAnswers++;
+            }
+            
+            var percentage = noCorrectAnswers / (double) test.Questions.Count * 100;
+            var eval = new Evaluation() { TestId = model.Id, StudentId = (int) model.StudentId, Percentage = percentage };
+            await _context.Evaluations.AddAsync(eval);
+            await _context.SaveChangesAsync();
+            return StatusCode(200, percentage);
         }
     }
 }
