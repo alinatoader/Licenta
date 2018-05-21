@@ -46,6 +46,8 @@ namespace ELearning.Data
                 new Concept{Name = "Calcul numeric"},
                 new Concept{Name = "Testare software"},
                 new Concept{Name = "Inteligenta artificiala"},
+                new Concept{Name = "Programare paralela"},
+                new Concept{Name = "Sisteme de operare"},
             };
             context.Concepts.AddRange(concepts);
             context.SaveChanges();
@@ -56,22 +58,25 @@ namespace ELearning.Data
                 new Assignment{  Deadline = new DateTime(2018,7,23), GroupId = 4 , ProfessorId = 1, ConceptId = 2},
                 new Assignment{  Deadline = new DateTime(2018,5,25), GroupId = 4 , ProfessorId = 1, ConceptId = 3},
                 new Assignment{ Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1, ConceptId = 4},
+                new Assignment{ Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1, ConceptId = 5},
+                new Assignment{ Deadline = new DateTime(2018,6,3), GroupId = 4 , ProfessorId = 1, ConceptId = 6},
+
 };
             context.Assignments.AddRange(assignments);
             context.SaveChanges();
 
             var questions = new Question[]
             {
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
                 new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
                 new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 3},
-                new Question{Text = "Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Rejected, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4, Comment = "Nu e destul de buna. Te rog sa mai incerci!"},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Rejected, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3, Comment = "Nu se ridica la nivelul asteptarilor. Te credeam mai inteligent!"},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 4},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 3},
+                new Question{Text = "Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4, Comment = "Nu e destul de buna. Te rog sa mai incerci!"},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3, Comment = "Nu se ridica la nivelul asteptarilor. Te credeam mai inteligent!"},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 4},
+                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
             };
             context.Questions.AddRange(questions);
             context.SaveChanges();
@@ -118,6 +123,12 @@ namespace ELearning.Data
                 new QuestionConcept(){QuestionId=2, ConceptId=3},
                 new QuestionConcept(){QuestionId=2, ConceptId=2},
                 new QuestionConcept(){QuestionId=3, ConceptId=4},
+                new QuestionConcept(){QuestionId=9, ConceptId=4},
+                new QuestionConcept(){QuestionId=4, ConceptId=3},
+                new QuestionConcept(){QuestionId=3, ConceptId=2},
+                new QuestionConcept(){QuestionId=7, ConceptId=2},
+                new QuestionConcept(){QuestionId=2, ConceptId=1},
+                new QuestionConcept(){QuestionId=6, ConceptId=1},
             };
             context.QuestionConcepts.AddRange(questionConcepts);
             context.SaveChanges();

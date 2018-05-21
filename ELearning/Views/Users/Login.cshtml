@@ -1,0 +1,44 @@
+﻿@model ELearning.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ELearning</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/clasic-template/css/bootstrap.min.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/clasic-template/css/templatemo-style.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+</head>
+<body>
+    <form asp-action="Login" style="width: 30%;margin-left: 35%;margin-top: 15%;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="tm-gold-text tm-title">Bun venit!</h3>
+        <div class="form-group row">
+            <input type="email" asp-for="Email" class="form-control" placeholder="Email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <input type="password" asp-for="Password" class="form-control" placeholder="Parola" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <input type="submit" value="Login" class="tm-btn right-buttons" style="width:40%;"/>
+        </div>
+    </form>
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/lib/clasic-template/js/jquery-1.11.3.min.js" asp-append-version="true"></script>
+    <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js" asp-append-version="true"></script>
+    <script src="~/lib/clasic-template/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
