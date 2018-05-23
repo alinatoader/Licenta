@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ELearning.Data;
 using ELearning.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,7 @@ namespace ELearning.Controllers
                 }
             }
             TempData["Test"] = JsonConvert.SerializeObject(test);
-            return StatusCode(200);
+            return StatusCode(200, HttpContext.Session.GetString("user"));
         }
 
         public async Task<IActionResult> Edit(int? id)

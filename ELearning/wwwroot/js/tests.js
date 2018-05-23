@@ -35,7 +35,7 @@
             url: '/Tests/GenerateTest',
             data: test,
             success: function (response) {
-                if (user === 'prof') {
+                if (response === 'prof') {
                     window.location.href = '/Tests/Edit';
                 }
                 else {
