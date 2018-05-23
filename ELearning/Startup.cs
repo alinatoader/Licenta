@@ -53,7 +53,7 @@ namespace ELearning
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Start}/{id?}");
+                    template: "{controller=Users}/{action=Login}/{id?}");
             });
         }
     }

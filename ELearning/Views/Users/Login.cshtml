@@ -28,7 +28,7 @@
             <input type="password" asp-for="Password" class="form-control" placeholder="Parola" required />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-
+        <h5 class="text-danger">@ViewBag.Message</h5>
         <div class="form-group row">
             <input type="submit" value="Login" class="tm-btn right-buttons" style="width:40%;"/>
         </div>

@@ -25,16 +25,26 @@
 
                     <div class="collapse navbar-toggleable-sm" id="tmNavbar">
                         <ul class="nav navbar-nav">
-                            @*<li class="nav-item">
-                                <a asp-controller="Questions" asp-action="IncomingQuestions" class="nav-link">Intrebari</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-controller="Assignments" asp-action="Create" class="nav-link">Teme</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-controller="Tests" asp-action="Index" class="nav-link">Teste</a>
-                            </li>*@
-                            <li class="nav-item">
+                            @{var user = HttpContextAccessor.HttpContext.Session.GetString("user"); }
+                            @if (@user == "prof")
+                            {
+
+                                <li class="nav-item">
+                                    <a asp-controller="Questions" asp-action="IncomingQuestions" class="nav-link">Intrebari</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Assignments" asp-action="Create" class="nav-link">Teme</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Tests" asp-action="Index" class="nav-link">Teste</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Users" asp-action="Logout" class="nav-link">Logout</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
                                     <a asp-controller="Questions" asp-action="Create" class="nav-link">Intrebari</a>
                                 </li>
                                 <li class="nav-item">
@@ -43,6 +53,10 @@
                                 <li class="nav-item">
                                     <a asp-controller="Tests" asp-action="StudentIndex" class="nav-link">Teste</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a asp-controller="Users" asp-action="Logout" class="nav-link">Logout</a>
+                                </li>
+                            }
                         </ul>
                     </div>
 

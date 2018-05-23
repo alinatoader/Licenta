@@ -28,14 +28,14 @@ namespace ELearning.Data
 
             var profs = new Professor[]
             {
-                new Professor{FirstName="Camelia", LastName="Serban", Email="camelia.serban@yahoo.com"}
+                new Professor{FirstName="Camelia", LastName="Serban", Email="camelia.serban@yahoo.com", Password = "parola"}
             };
             context.Professors.AddRange(profs);
             context.SaveChanges();
 
             var students = new Student[]
             {
-                new Student{FirstName="Alina", LastName="Toader", Email="alina@yahoo.com", GroupId = 4}
+                new Student{FirstName="Alina", LastName="Toader", Email="alina@yahoo.com", GroupId = 4, Password = "parola"}
             };
             context.Students.AddRange(students);
             context.SaveChanges();
