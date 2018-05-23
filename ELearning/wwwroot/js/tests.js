@@ -35,10 +35,12 @@
             url: '/Tests/GenerateTest',
             data: test,
             success: function (response) {
-                //daca e prof
-                //window.location.href = '/Tests/Edit';
-                //daca e student
-                window.location.href = '/Tests/TakeTest';
+                if (user === 'prof') {
+                    window.location.href = '/Tests/Edit';
+                }
+                else {
+                    window.location.href = '/Tests/TakeTest';
+                }
             },
             error: function (response) {
                 console.log('error');

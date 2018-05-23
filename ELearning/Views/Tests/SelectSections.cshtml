@@ -5,6 +5,9 @@
 
 @section Scripts{
     <script type="text/javascript" src="~/js/tests.js" asp-append-version="true"></script>
+    <script type="text/javascript" asp-append-version="true">
+        var user = '@HttpContextAccessor.HttpContext.Session.GetString("user")';
+    </script>
 }
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-xs-center">
@@ -21,9 +24,9 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="button" value="+" class="tm-btn" id="add-section-button" style="padding: 5px 10px;"/>
+        <input type="button" value="+" class="tm-btn" id="add-section-button" style="padding: 5px 10px;" />
     </div>
-    <input type="submit" value="Genereaza test" class="tm-btn right-buttons" id="generate-test-button"/>
+    <input type="submit" value="Genereaza test" class="tm-btn right-buttons" id="generate-test-button" />
 </form>
 
 
