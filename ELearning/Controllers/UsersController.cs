@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Helpers;
 using ELearning.Data;
 using ELearning.Models;
 using Microsoft.AspNetCore.Http;

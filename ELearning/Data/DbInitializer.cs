@@ -67,68 +67,59 @@ namespace ELearning.Data
 
             var questions = new Question[]
             {
-                new Question{Text = "Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 3},
-                new Question{Text = "Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie? Aceasta este o intrebare de lungime medie?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 4, Comment = "Nu e destul de buna. Te rog sa mai incerci!"},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 2},
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3, Comment = "Nu se ridica la nivelul asteptarilor. Te credeam mai inteligent!"},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 4},
-                new Question{Text = "Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga. Aceasta este o intrebare foarte lunga  Aceasta este o intrebare foarte lunga", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce metoda putem folosi pentru rezolvarea sistemelor neliniare?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 2},
+                new Question{Text = "Cat de grea este materia \"Calcul numeric\"?", Status = QuestionStatus.Rejected, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 2, Comment= "Te rog sa te gandesti la intrebari mai serioase!"},
+                new Question{Text = "Ce este testarea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 3},
+
+                new Question{Text = "Ce este incapsularea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce este polimorfismul?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1},
+                new Question{Text = "Ce este mostenirea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1},
             };
             context.Questions.AddRange(questions);
             context.SaveChanges();
 
             var answers = new Answer[]
             {
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 1},
-                new Answer{Text = "rasp2", Correct = true, QuestionId = 1},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 1},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 2},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 2},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 2},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 3},
-                new Answer{Text = "rasp2", Correct = true, QuestionId = 3},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 3},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 4},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 4},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 4},
-                new Answer{Text = "rasp1", Correct = false, QuestionId = 5},
-                new Answer{Text = "rasp2", Correct = true, QuestionId = 5},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 5},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 6},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 6},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 6},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 7},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 7},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 7},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 8},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 8},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 8},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 9},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 9},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 9},
-                new Answer{Text = "rasp1", Correct = true, QuestionId = 10},
-                new Answer{Text = "rasp2", Correct = false, QuestionId = 10},
-                new Answer{Text = "rasp3", Correct = false, QuestionId = 10},
+                new Answer{Text = "Object Oriented Programming", Correct = true, QuestionId = 2},
+                new Answer{Text = "Raspuns Gresit", Correct = false, QuestionId = 2},
+                new Answer{Text = "Raspuns Gresit", Correct = false, QuestionId = 2},
+                new Answer{Text = "Abstractizare, incapsulare, polimorfism si mostenire", Correct = true, QuestionId = 1},
+                new Answer{Text = "Abstractizare si incapsulare", Correct = false, QuestionId = 1},
+                new Answer{Text = "Abstractizare, incapsulare si mostenire", Correct = false, QuestionId = 1},
+                new Answer{Text = "Newton", Correct = true, QuestionId = 3},
+                new Answer{Text = "Hermite", Correct = false, QuestionId = 3},
+                new Answer{Text = "Spline", Correct = false, QuestionId = 3},
+                new Answer{Text = "Toate", Correct = false, QuestionId = 3},
+                new Answer{Text = "Corect", Correct = true, QuestionId = 4 },
+                new Answer{Text = "Corect", Correct = true, QuestionId = 4},
+                new Answer{Text = "Fals", Correct = false, QuestionId = 4},
+                new Answer{Text = "O investigație empirică realizată cu scopul de a oferi părților interesate informații referitoare la calitatea produsului sau serviciului supus testării", Correct=true, QuestionId=5},
+                new Answer{Text = "Raspuns gresit", Correct = false, QuestionId = 5},
+                new Answer{Text = "Raspuns gresit", Correct = false, QuestionId = 5},
+                new Answer{Text = "Un feature care restrictioneaza accesul la membrii unui obiect", Correct = true, QuestionId = 6},
+                new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = true, QuestionId = 6},
+                new Answer{Text = "Posibilitatea de a rescrie o functie", Correct = false, QuestionId = 6},
+                new Answer{Text = "Capacitatea unui obiect de a lua forme diferite", Correct = true, QuestionId = 7},
+                new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = false, QuestionId = 7},
+                new Answer{Text = "Posibilitatea de a implementa o functie", Correct = false, QuestionId = 7},
+                new Answer{Text = "Posibilitatea unei clase de a copia o alta clasa fara a rescrie codul", Correct = true, QuestionId = 8},
+                new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = false, QuestionId = 8},
+                new Answer{Text = "Posibilitatea de a implementa o functie", Correct = false, QuestionId = 8},
+
             };
             context.Answers.AddRange(answers);
             context.SaveChanges();
 
             var questionConcepts = new QuestionConcept[]
             {
-                new QuestionConcept(){QuestionId=2, ConceptId=1},
-                new QuestionConcept(){QuestionId=2, ConceptId=3},
-                new QuestionConcept(){QuestionId=2, ConceptId=2},
-                new QuestionConcept(){QuestionId=3, ConceptId=4},
-                new QuestionConcept(){QuestionId=9, ConceptId=4},
-                new QuestionConcept(){QuestionId=4, ConceptId=3},
-                new QuestionConcept(){QuestionId=3, ConceptId=2},
-                new QuestionConcept(){QuestionId=7, ConceptId=2},
-                new QuestionConcept(){QuestionId=2, ConceptId=1},
+                new QuestionConcept(){QuestionId=4, ConceptId=2},
+                new QuestionConcept(){QuestionId=5, ConceptId=3},
                 new QuestionConcept(){QuestionId=6, ConceptId=1},
+                new QuestionConcept(){QuestionId=7, ConceptId=1},
+                new QuestionConcept(){QuestionId=8, ConceptId=1},
+
             };
             context.QuestionConcepts.AddRange(questionConcepts);
             context.SaveChanges();
