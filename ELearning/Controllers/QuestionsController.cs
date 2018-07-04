@@ -118,6 +118,13 @@ namespace ELearning.Controllers
                 try
                 {
                     question.Status = QuestionStatus.Pending;
+                    question.StudentId = HttpContext.Session.GetInt32("ID");
+                    foreach (var answer in question.Answers)
+                    {
+                        var a = await _context.Answers.AsNoTracking().FirstOrDefaultAsync(aa => aa.Text == answer.Text && aa.QuestionId == question.Id);
+                        if (a != null)
+                            answer.Id = a.Id;
+                    }
                     _context.Update(question);
                     await _context.SaveChangesAsync();
                 }
@@ -209,7 +216,7 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> MyPendingQuestions(int id)
         {
-            id = 1;
+            id = (int)HttpContext.Session.GetInt32("ID");
             var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return BadRequest();
