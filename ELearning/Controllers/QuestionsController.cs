@@ -61,7 +61,13 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> IncomingQuestions()
         {
-            return View(await _context.Questions.AsNoTracking().Include(q => q.Answers).Where(q => q.Status == QuestionStatus.Pending).ToArrayAsync());
+            var assignments = await _context.Assignments.AsNoTracking().Include(a => a.Questions).Where(a => a.ProfessorId == HttpContext.Session.GetInt32("ID")).ToListAsync();
+            List<Question> questions = new List<Question>();
+            foreach(var assignment in assignments)
+            {
+                questions.AddRange(assignment.Questions.Where(q => q.Status == QuestionStatus.Pending));
+            }
+            return View(questions);
         }
 
         public async Task<IActionResult> AcceptQuestion(int id)
@@ -206,7 +212,7 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> MyAcceptedQuestions(int id)
         {
-            id = 1;
+            id = (int)HttpContext.Session.GetInt32("ID");
             var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return BadRequest();
@@ -225,7 +231,7 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> MyRejectedQuestions(int id)
         {
-            id = 1;
+            id = (int)HttpContext.Session.GetInt32("ID");
             var student = await _context.Students.AsNoTracking().Include(s => s.Questions).FirstOrDefaultAsync(s => s.Id == id);
             if (student == null)
                 return BadRequest();

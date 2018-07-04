@@ -7,6 +7,7 @@ using ELearning.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ELearning.Controllers
@@ -52,6 +53,42 @@ namespace ELearning.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public IActionResult Register()
+        {
+            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                if(user.Rol == UserType.Student)
+                {
+                    var student = new Student { FirstName = user.FirstName, LastName = user.LastName, Email = user.Email };
+                    var group = await _context.Groups.AsNoTracking().FirstOrDefaultAsync(g => g.Name == user.Group);
+                    if (group == null)
+                    {
+                        student.Group = new Group { Name = user.Group };
+                    }
+                    else { student.GroupId = group.Id; }
+                    student.Password = new PasswordHasher<Student>().HashPassword(student, user.Password);
+                    _context.Add(student);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    var prof = new Professor { FirstName = user.FirstName, LastName = user.LastName, Email = user.Email };
+                    prof.Password = new PasswordHasher<Professor>().HashPassword(prof, user.Password);
+                    _context.Add(prof);
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("Login");
+            }
+            return View(user);
         }
     }
 }
