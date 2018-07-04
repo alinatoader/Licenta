@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ELearning.Data;
 using ELearning.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ELearning.Controllers
 {
@@ -82,6 +83,7 @@ namespace ELearning.Controllers
                 assignment.ConceptId = concept.Id;
                 assignment.Group = null;
                 assignment.Concept = null;
+                assignment.ProfessorId = (int) HttpContext.Session.GetInt32("ID");
                 _context.Add(assignment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Create),new { message = "Tema trimisa cu succes" });
@@ -212,7 +214,7 @@ namespace ELearning.Controllers
 
         private async Task<ICollection<Assignment>> FindMyAssignments()
         {
-            var id = 1;
+            var id = HttpContext.Session.GetInt32("ID");
             var user = await _context.Students.AsNoTracking().Include(u => u.Group).FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {

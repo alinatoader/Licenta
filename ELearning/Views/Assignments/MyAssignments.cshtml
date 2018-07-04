@@ -10,7 +10,7 @@
 
 <form asp-action="MyAssignments">
     <div class="form-group">
-        <select asp-for="ProfessorId" asp-items="@ViewBag.Professors" class="form-control" style="display:inline-block; width:40%;">
+        <select asp-for="ProfessorId" asp-items="@ViewBag.Professors" class="form-control" style="display:inline-block; width:40%;" autocomplete="off">
             <option style="display:none;" selected>Selecteaza profesor</option>
         </select>
         <select asp-for="DeadlineSortDir" class="form-control" style="display:inline-block; width:20%;">

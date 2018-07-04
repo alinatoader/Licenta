@@ -93,7 +93,7 @@ namespace ELearning.Controllers
         {
             var test = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
             test.Name = model.Name;
-            test.ProfessorId = 1;
+            test.ProfessorId = HttpContext.Session.GetInt32("ID");
             try
             {
                 await _context.Tests.AddAsync(test);
@@ -162,7 +162,7 @@ namespace ELearning.Controllers
                 model = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
                 if (model.Id == 0)
                 {
-                    model.StudentId = 1;
+                    model.StudentId = HttpContext.Session.GetInt32("ID");
                     model.Name = test.Name;
                     await _context.Tests.AddAsync(model);
                     await _context.SaveChangesAsync();
