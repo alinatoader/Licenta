@@ -21,26 +21,27 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Concept.Name" class="control-label"></label>
-                    <input list="concepts" asp-for="Concept.Name" class="form-control" />
+                    <input list="concepts" asp-for="Concept.Name" class="form-control" required/>
                     <datalist id="concepts">
                         @foreach (var d in ViewBag.Concept)
-                        {
-                            <option value="@d.Text" />
-                        }
+            {
+                <option value="@d.Text" />
+}
                     </datalist>
                     <span asp-validation-for="Concept.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Group.Name" class="control-label"></label>
-                    <input list="groups" asp-for="Group.Name" class="form-control" />
+                    <input list="groups" asp-for="Group.Name" class="form-control" required/>
                     <datalist id="groups">
                         @foreach (var g in ViewBag.Group)
-                        {
-                            <option value="@g.Text" />
-                        }
+            {
+                <option value="@g.Text" />
+}
                     </datalist>
                 </div>
                 <input asp-for="ProfessorId" value="1" hidden />
+                <div class="text-info">@ViewData["Message"]</div>
                 <div class="form-group">
                     <input type="submit" value="Trimite" class="tm-btn" />
                 </div>

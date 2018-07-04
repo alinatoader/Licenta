@@ -1,117 +1,250 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ELearning.Models.User">
-    <Position X="0.75" Y="0.5" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ELearning.Controllers.AssignmentsController">
+    <Position X="10" Y="7.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAEAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
-      <FileName>Models\User.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Test">
-    <Position X="6.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Test.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Student">
-    <Position X="2" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Student.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Question">
-    <Position X="8.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAEQAAAAgAAAAAEAAAAAAAAAAAAQAAACAACCAA=</HashCode>
-      <FileName>Models\Question.cs</FileName>
+      <HashCode>AAAAAAAAAAgBBACAAAAAAAABAAEAAEACAAkAAAAAAAA=</HashCode>
+      <FileName>Controllers\AssignmentsController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Category" />
-      <Property Name="Student" />
-      <Property Name="Test" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ELearning.Models.Professor">
-    <Position X="0.5" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Professor.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Group">
-    <Position X="4.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAICAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Group.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Category">
-    <Position X="6.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAASAAAAAAAAEAAAABAAAAAA=</HashCode>
-      <FileName>Models\Category.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ELearning.Models.Assignment">
-    <Position X="2.75" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAEAEAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAACAA=</HashCode>
-      <FileName>Models\Assignment.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Category" />
-      <Property Name="Group" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="ELearning.Models.Answer">
-    <Position X="10" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAEAAAAAAAAAAAAAAAAAAAAAAAEAAAACAQAAAA=</HashCode>
-      <FileName>Models\Answer.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Question" />
+      <Field Name="_context" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ELearning.Controllers.QuestionsController">
-    <Position X="10" Y="6.25" Width="1.5" />
+    <Position X="15.25" Y="5.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAEBAAAAAAAAAAEAAAAAEAAIAGAAAAAAAA=</HashCode>
+      <HashCode>AACAAIABAAABBABAAAAAAAAQAAAAAEACIQGAAAAAAAA=</HashCode>
       <FileName>Controllers\QuestionsController.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="_context" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="ELearning.Data.ELearningContext">
-    <Position X="6.75" Y="6.25" Width="1.5" />
+  <Class Name="ELearning.Controllers.TestsController">
+    <Position X="13.75" Y="2.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>EAIAAGAAAAAAAAAAAAAAAAAAAAAAEAAEQAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAAAARBFAAAAAQAAAAAAAAAAAACAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\TestsController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Controllers.UsersController">
+    <Position X="14.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\UsersController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_context" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Data.DbInitializer">
+    <Position X="5.75" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\DbInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Data.ELearningContext">
+    <Position X="12.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAEAAAAAIAAAYAAAAAAAIAAAAAAAEREAAAAAAAAA=</HashCode>
       <FileName>Data\ELearningContext.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="ELearning.Models.Answer">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAQIAAA=</HashCode>
+      <FileName>Models\Answer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Assignment">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAEAAAAAAAAAIAAAACAAAAAAAQEAAEAFAAAAAA=</HashCode>
+      <FileName>Models\Assignment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Concept" />
+      <Property Name="Group" />
+      <Property Name="Professor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Concept">
+    <Position X="2" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Concept.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Evaluation">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAAAAAAAAAEAAAAAAgAAAAAAAAACAACAAA=</HashCode>
+      <FileName>Models\Evaluation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Student" />
+      <Property Name="Test" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Group">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Professor">
+    <Position X="10.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Professor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.Question">
+    <Position X="11.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEwAAgAQAIAAAAAQAIAAAAAAAAQAAACAACAAA=</HashCode>
+      <FileName>Models\Question.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.QuestionConcept">
+    <Position X="5.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAEAQAAAA=</HashCode>
+      <FileName>Models\QuestionConcept.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Concept" />
+      <Property Name="Question" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Section">
+    <Position X="8.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAgAAAAAAAQAAAIAEAAAAAAAgAAAAAAAAGAAAAAA=</HashCode>
+      <FileName>Models\Section.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Concept" />
+      <Property Name="Test" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.SectionQuestion">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIQQAAA=</HashCode>
+      <FileName>Models\SectionQuestion.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+      <Property Name="Section" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Student">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAEBAAAAAAAAAA=</HashCode>
+      <FileName>Models\Student.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Group" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.Test">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQAAAAAAAAAAAAASAAAAAAAAABEAABAACAAA=</HashCode>
+      <FileName>Models\Test.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Professor" />
+      <Property Name="Student" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ELearning.Models.User">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAACAAAIAAAAAAAAAAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="ELearning.Program">
-    <Position X="4.5" Y="6.5" Width="1.5" />
+    <Position X="2.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ELearning.Startup">
-    <Position X="2.25" Y="6.5" Width="1.5" />
+    <Position X="0.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
       <FileName>Startup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ELearning.Data.DbInitializer">
-    <Position X="4.25" Y="8.25" Width="1.5" />
+  <Class Name="ELearning.Models.AssignmentViewModel" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Data\DbInitializer.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\AssignmentViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="ELearning.Models.LoginViewModel" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.QuestionViewModel" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Models\QuestionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Models.TestViewModel" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TestViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Controllers.HomeController" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ELearning.Services.MailingService" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAQAAAAA=</HashCode>
+      <FileName>Services\MailingService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ELearning.Models.QuestionStatus" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Question.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ELearning.Models.QuestionDifficulty" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAA=</HashCode>
+      <FileName>Models\Question.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 
 namespace ELearning.Controllers
 {
@@ -25,7 +26,7 @@ namespace ELearning.Controllers
 
         public async Task<IActionResult> Create(int? id)
         {
-            var student = await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.Id == 1);
+            var student = await _context.Students.AsNoTracking().FirstOrDefaultAsync(s => s.Id == HttpContext.Session.GetInt32("ID"));
             if (id != null)
                 ViewData["Assignment"] = new SelectList(_context.Assignments.AsNoTracking().Include(a => a.Concept).Include(a => a.Professor).Where(a => a.GroupId == student.GroupId), "Id", "ComposedName", (int)id);
             else
@@ -42,6 +43,7 @@ namespace ELearning.Controllers
                 if (exists == null)
                 {
                     question.Status = QuestionStatus.Pending;
+                    question.StudentId = HttpContext.Session.GetInt32("ID");
                     var assignment = await _context.Assignments.AsNoTracking().FirstOrDefaultAsync(a => a.Id == question.AssignmentId);
                     question.QuestionConcepts = new List<QuestionConcept>() { new QuestionConcept() { ConceptId = assignment.ConceptId } };
                     await _context.AddAsync(question);
@@ -86,7 +88,7 @@ namespace ELearning.Controllers
                 return NotFound();
             }
 
-            ViewData["Concepts"] = new SelectList(await _context.QuestionConcepts.AsNoTracking().Include(qc => qc.Concept).Select(qc => qc.Concept).ToListAsync(), "Id", "Name");
+            ViewData["Concepts"] = new SelectList(await _context.Concepts.AsNoTracking().ToListAsync(), "Id", "Name");
             return View(question);
         }
 
@@ -161,7 +163,8 @@ namespace ELearning.Controllers
             }
         }
 
-        public async Task<IActionResult> RejectQuestion(int? id)
+        [HttpGet]
+        public async Task<IActionResult> RejectQuestion(int? id, string comment = null)
         {
             if (id == null)
             {
@@ -176,6 +179,7 @@ namespace ELearning.Controllers
             try
             {
                 question.Status = QuestionStatus.Rejected;
+                question.Comment = comment;
                 _context.Update(question);
                 await _context.SaveChangesAsync();
             }
@@ -190,7 +194,7 @@ namespace ELearning.Controllers
                     throw;
                 }
             }
-            return RedirectToAction(nameof(IncomingQuestions));
+            return StatusCode(200);
         }
 
         public async Task<IActionResult> MyAcceptedQuestions(int id)

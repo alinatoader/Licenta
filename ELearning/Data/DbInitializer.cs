@@ -28,7 +28,7 @@ namespace ELearning.Data
 
             var profs = new Professor[]
             {
-                new Professor{FirstName="Camelia", LastName="Serban", Email="camelia.serban@yahoo.com", Password = "AQAAAAEAACcQAAAAEKE6wezecQR/8l2qalbnEEMVN32swwfcgPMAJ+FShyKF3SSQvzYnjtT9pvYi/d0g4w=="}
+                new Professor{FirstName="Ana", LastName="Popescu", Email="ana@yahoo.com", Password = "AQAAAAEAACcQAAAAEKE6wezecQR/8l2qalbnEEMVN32swwfcgPMAJ+FShyKF3SSQvzYnjtT9pvYi/d0g4w=="}
             };
             context.Professors.AddRange(profs);
             context.SaveChanges();
@@ -67,19 +67,19 @@ namespace ELearning.Data
 
             var questions = new Question[]
             {
-                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
+                new Question{Text = "Care sunt principiile OOP?", Status = QuestionStatus.Pending, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
                     new Answer{Text = "Abstractizare, incapsulare, polimorfism si mostenire", Correct = true},
                     new Answer{Text = "Abstractizare si incapsulare", Correct = false},
                     new Answer{Text = "Abstractizare, incapsulare si mostenire", Correct = false}
                     }
                 },
-                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
+                new Question{Text = "Ce inseamna OOP?", Status = QuestionStatus.Pending, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
                     new Answer{Text = "Object Oriented Programming", Correct = true},
                     new Answer{Text = "Raspuns Gresit", Correct = false},
                     new Answer{Text = "Raspuns Gresit", Correct = false},
                     }
                 },
-                new Question{Text = "Ce metoda putem folosi pentru rezolvarea sistemelor neliniare?", Status = QuestionStatus.Pending, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 2, Answers = new List<Answer>(){
+                new Question{Text = "Ce metoda putem folosi pentru rezolvarea sistemelor neliniare?", Status = QuestionStatus.Pending, StudentId = 1, AssignmentId = 2, Answers = new List<Answer>(){
                     new Answer{Text = "Newton", Correct = true},
                     new Answer{Text = "Hermite", Correct = false},
                     new Answer{Text = "Spline", Correct = false},
@@ -96,27 +96,43 @@ namespace ELearning.Data
                     new Answer{Text = "O investigație empirică realizată cu scopul de a oferi părților interesate informații referitoare la calitatea produsului sau serviciului supus testării", Correct=true},
                     new Answer{Text = "Raspuns gresit", Correct = false},
                     new Answer{Text = "Raspuns gresit", Correct = false},
+                    },
+                    QuestionConcepts = new List<QuestionConcept>()
+                    {
+                        new QuestionConcept(){ ConceptId = 3}
                     }
                 },
 
-                new Question{Text = "Ce este incapsularea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Easy, StudentId = 1, AssignmentId = 1,
+                new Question{Text = "Ce este incapsularea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1,
                     Answers = new List<Answer>()
                     {
                         new Answer{Text = "Un feature care restrictioneaza accesul la membrii unui obiect", Correct = true},
                         new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = true},
                         new Answer{Text = "Posibilitatea de a rescrie o functie", Correct = false},
+                    },
+                    QuestionConcepts = new List<QuestionConcept>()
+                    {
+                        new QuestionConcept(){ ConceptId = 1}
                     }
                 },
                 new Question{Text = "Ce este polimorfismul?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
                     new Answer{Text = "Capacitatea unui obiect de a lua forme diferite", Correct = true},
                     new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = false},
                     new Answer{Text = "Posibilitatea de a implementa o functie", Correct = false},
+                    },
+                    QuestionConcepts = new List<QuestionConcept>()
+                    {
+                        new QuestionConcept(){ ConceptId = 1}
                     }
                 },
-                new Question{Text = "Ce este mostenirea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Hard, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
+                new Question{Text = "Ce este mostenirea?", Status = QuestionStatus.Accepted, Difficulty = QuestionDifficulty.Medium, StudentId = 1, AssignmentId = 1, Answers = new List<Answer>(){
                     new Answer{Text = "Posibilitatea unei clase de a copia o alta clasa fara a rescrie codul", Correct = true},
                     new Answer{Text = "Reuniunea datelor si a metodelor unui obiect", Correct = false},
                     new Answer{Text = "Posibilitatea de a implementa o functie", Correct = false},
+                    },
+                    QuestionConcepts = new List<QuestionConcept>()
+                    {
+                        new QuestionConcept(){ ConceptId = 1}
                     }
                 },
 

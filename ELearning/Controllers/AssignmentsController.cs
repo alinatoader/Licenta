@@ -47,10 +47,11 @@ namespace ELearning.Controllers
         }
 
         // GET: Assignments/Create
-        public IActionResult Create()
+        public IActionResult Create(string message=null)
         {
             ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name");
             ViewData["Concept"] = new SelectList(_context.Concepts.AsNoTracking(), "Id", "Name");
+            ViewData["Message"] = message;
             return View();
         }
 
@@ -83,10 +84,11 @@ namespace ELearning.Controllers
                 assignment.Concept = null;
                 _context.Add(assignment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(Create),new { message = "Tema trimisa cu succes" });
             }
             ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name", assignment.Group);
             ViewData["Concept"] = new SelectList(_context.Concepts.AsNoTracking(), "Id", "Name", assignment.Concept);
+            
             return View(assignment);
         }
 

@@ -35,7 +35,7 @@
             var ansText = $(item).find('input[type="text"]').val();
             answers.push({ Correct: correct, Text: ansText });
         });
-        var question = { Text: text, StudentId: 1, AssignmentId: assignmentId, Answers: answers };
+        var question = { Text: text, AssignmentId: assignmentId, Answers: answers };
         $.ajax({
             type: 'POST',
             url: $('.create-question-form:visible').attr('action'),
@@ -54,6 +54,22 @@
 
     $('.summary-button').click(function () {
         $(this).next('.modal').modal('show');
+    });
+
+    $('#question-reject-button').click(function () {
+        event.preventDefault();
+        var comment = $("#Comment").val();
+        $.ajax({
+            type: 'GET',
+            url: $('#question-reject-button').attr('href') + "?" + $.param({ comment: comment }),
+            dataType: 'json',
+            success: function (response) {
+                window.location.href = '/Questions/IncomingQuestions';
+            },
+            error: function (response) {
+                window.location.href = '/Questions/IncomingQuestions';
+            }
+        });
     });
 
     $('#question-detail-form').submit(function () {

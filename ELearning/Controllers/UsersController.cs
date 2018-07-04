@@ -32,6 +32,7 @@ namespace ELearning.Controllers
             {
                 HttpContext.Session.SetInt32("ID", student.Id);
                 HttpContext.Session.SetString("user", "student");
+                HttpContext.Session.SetString("name", student.FullName + " - Student");
                 return RedirectToAction("Start", "Home");
             }
             var prof = await _context.Professors.AsNoTracking().FirstOrDefaultAsync(p => p.Email == model.Email);
@@ -39,6 +40,7 @@ namespace ELearning.Controllers
             {
                 HttpContext.Session.SetInt32("ID", prof.Id);
                 HttpContext.Session.SetString("user", "prof");
+                HttpContext.Session.SetString("name", prof.FullName + " - Profesor");
                 return RedirectToAction("Start", "Home");
             }
             ViewData["Message"] = "Credentiale invalide. Mai incearca!";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ELearning</title>
+    <title>E-Learning</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" asp-append-version="true">
     <link rel="stylesheet" href="~/lib/clasic-template/css/bootstrap.min.css" asp-append-version="true">
     <link rel="stylesheet" href="~/lib/clasic-template/css/templatemo-style.css" asp-append-version="true">
@@ -14,7 +14,7 @@
     <div class="tm-header">
         <div class="container-fluid">
             <div class="tm-header-inner">
-                <span class="navbar-brand tm-site-name">E-Learning</span>
+                <span class="navbar-brand tm-site-name">@HttpContextAccessor.HttpContext.Session.GetString("name")</span>
 
                 <!-- navbar -->
                 <nav class="navbar tm-main-nav">

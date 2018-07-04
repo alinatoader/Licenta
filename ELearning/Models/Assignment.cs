@@ -12,10 +12,11 @@ namespace ELearning.Models
         [Key]
         public int Id { get; set; }
         [Display(Name = "Data limita")]
+        [Required(ErrorMessage ="Data nu poate fi nula")]
         public DateTime Deadline { get; set; }
         [ForeignKey("Group")]
         public int GroupId { get; set; }
-        [Display(Name = "Grupa")]
+        [Required(ErrorMessage ="Grupa nu poate fi nula")]
         public virtual Group Group { get; set; }
         [ForeignKey("Professor")]
         public int ProfessorId { get; set; }
@@ -23,13 +24,14 @@ namespace ELearning.Models
         [ForeignKey("Concept")]
         public int ConceptId { get; set; }
         [Display(Name = "Concept")]
+        [Required(ErrorMessage ="Conceptul nu poate fi nul")]
         public virtual Concept Concept { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
         public string ComposedName
         {
             get
             {
-                return Concept.Name + " - " + Professor.FirstName + " " + Professor.LastName + " - Deadline: "+ Deadline.ToLongDateString();
+                return Concept?.Name + " - " + Professor?.FullName + " - Deadline: " + Deadline.ToLongDateString();
             }
         }
     }
