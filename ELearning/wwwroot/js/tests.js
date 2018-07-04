@@ -89,7 +89,7 @@
                 $('.corectness-of-answers').show();
                 $('#finish-test-button').hide();
                 $('#back-to-tests-button').show();
-                $('.modal-body h3').html(response + " %");
+                $('.modal-body h3').html(parseFloat(response).toFixed(2) + " %");
                 $('.modal').modal('show');
             },
             error: function (response) {

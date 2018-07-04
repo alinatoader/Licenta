@@ -135,7 +135,7 @@ namespace ELearning.Controllers
             else
             {
                 test = await _context.Tests.AsNoTracking().Include(t => t.Sections).FirstOrDefaultAsync(t => t.Id == id);
-                TempData["Test"] = JsonConvert.SerializeObject(new Test() { Id = test.Id, StudentId = test.StudentId, Name = test.Name });
+                //TempData["Test"] = JsonConvert.SerializeObject(new Test() { Id = test.Id, StudentId = test.StudentId, Name = test.Name });
                 foreach (var section in test.Sections)
                 {
                     var fullSection = await _context.Sections.AsNoTracking().Include(s => s.SectionQuestions).FirstOrDefaultAsync(ss => ss.Id == section.Id);
@@ -156,33 +156,35 @@ namespace ELearning.Controllers
         public async Task<IActionResult> TakeTest(TestViewModel test)
         {
             var noCorrectAnswers = 0;
-            var model = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
-            if (model.Id == 0)
+            Test model;
+            if (TempData.Keys.Contains("Test"))
             {
-                model.StudentId = 1;
-                model.Name = test.Name;
-                await _context.Tests.AddAsync(model);
-                await _context.SaveChangesAsync();
+                model = JsonConvert.DeserializeObject<Test>(TempData["Test"] as string);
+                if (model.Id == 0)
+                {
+                    model.StudentId = 1;
+                    model.Name = test.Name;
+                    await _context.Tests.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                }
             }
-
+            else { model = await _context.Tests.AsNoTracking().FirstOrDefaultAsync(t => t.Name == test.Name); }
             foreach (var question in test.Questions)
             {
                 var isCorrect = true;
-                foreach (var answerId in question.AnswerIds)
-                {
-                    var fullAnswer = await _context.Answers.AsNoTracking().FirstOrDefaultAsync(a => a.Id == answerId);
-                    if (!fullAnswer.Correct)
+                var fullAnswers = await _context.Answers.AsNoTracking().Where(a => a.QuestionId == question.QuestionId && a.Correct == true).ToListAsync();
+                foreach (var answer in fullAnswers)
+                    if (!question.AnswerIds.Contains(answer.Id))
                     {
                         isCorrect = false;
                         break;
                     }
-                }
                 if (isCorrect)
                     noCorrectAnswers++;
             }
 
             var percentage = noCorrectAnswers / (double)test.Questions.Count * 100;
-            var eval = new Evaluation() { TestId = model.Id, StudentId = (int)model.StudentId, Percentage = percentage };
+            var eval = new Evaluation() { TestId = model.Id, StudentId = (int)HttpContext.Session.GetInt32("ID"), Percentage = percentage };
             await _context.Evaluations.AddAsync(eval);
             await _context.SaveChangesAsync();
             return StatusCode(200, percentage);
