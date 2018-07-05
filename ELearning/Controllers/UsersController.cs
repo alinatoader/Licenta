@@ -88,6 +88,7 @@ namespace ELearning.Controllers
                 }
                 return RedirectToAction("Login");
             }
+            ViewData["Group"] = new SelectList(_context.Groups.AsNoTracking(), "Id", "Name");
             return View(user);
         }
     }

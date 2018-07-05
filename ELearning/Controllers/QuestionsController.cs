@@ -42,6 +42,7 @@ namespace ELearning.Controllers
                 var exists = await _context.Questions.AsNoTracking().FirstOrDefaultAsync(q => q.Text == question.Text);
                 if (exists == null)
                 {
+                    question.Id = 0;
                     question.Status = QuestionStatus.Pending;
                     question.StudentId = HttpContext.Session.GetInt32("ID");
                     var assignment = await _context.Assignments.AsNoTracking().FirstOrDefaultAsync(a => a.Id == question.AssignmentId);
